@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Agent Instruction Files — The Developer Reference</title>
+  <meta name="description" content="A community reference covering AI agent instruction files: AGENTS.md, CLAUDE.md, copilot-instructions.md, GEMINI.md and more. Cross-tool compatibility matrix, templates, and changelog." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #111118;
+      --surface2: #1a1a24;
+      --border: #2a2a3a;
+      --border-bright: #3a3a50;
+      --text: #e8e8f0;
+      --text-muted: #8888aa;
+      --text-dim: #555570;
+      --accent: #7c6aff;
+      --accent2: #00d4aa;
+      --accent3: #ff6b6b;
+      --accent4: #ffaa44;
+      --claude: #cc785c;
+      --copilot: #238636;
+      --gemini: #4285f4;
+      --codex: #10a37f;
+      --cursor: #8b5cf6;
+      --mono: 'IBM Plex Mono', monospace;
+      --display: 'Syne', sans-serif;
+      --body: 'Inter', sans-serif;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--body);
+      font-size: 15px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* NOISE TEXTURE */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10, 10, 15, 0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+    }
+
+    .nav-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+    }
+
+    .nav-logo {
+      font-family: var(--mono);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text-muted);
+      text-decoration: none;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--text); }
+
+    .nav-badge {
+      font-family: var(--mono);
+      font-size: 11px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      padding: 3px 10px;
+      border-radius: 20px;
+    }
+
+    /* HERO */
+    .hero {
+      position: relative;
+      padding: 100px 2rem 80px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -100px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 800px;
+      height: 500px;
+      background: radial-gradient(ellipse at center, rgba(124, 106, 255, 0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero-eyebrow::before,
+    .hero-eyebrow::after {
+      content: '';
+      display: block;
+      width: 30px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.5;
+    }
+
+    h1 {
+      font-family: var(--display);
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 span {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      color: var(--text-muted);
+      max-width: 580px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 10px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: white;
+      border: 1px solid var(--accent);
+    }
+    .btn-primary:hover { background: #9580ff; }
+
+    .btn-outline {
+      background: transparent;
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+    }
+    .btn-outline:hover { border-color: var(--border-bright); color: var(--text); }
+
+    /* STATS BAR */
+    .stats-bar {
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
+      padding: 1.2rem 2rem;
+    }
+
+    .stats-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: center;
+      gap: 4rem;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: var(--display);
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .stat-label {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* MAIN LAYOUT */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem;
+    }
+
+    section {
+      padding: 80px 2rem;
+    }
+
+    .section-header {
+      margin-bottom: 3rem;
+    }
+
+    .section-tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+    }
+
+    h2 {
+      font-family: var(--display);
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-desc {
+      color: var(--text-muted);
+      max-width: 600px;
+      font-size: 15px;
+    }
+
+    /* ===== COMPATIBILITY MATRIX ===== */
+    #matrix { background: var(--surface); }
+
+    .matrix-wrap {
+      overflow-x: auto;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--mono);
+      font-size: 12px;
+      min-width: 700px;
+    }
+
+    thead tr {
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      padding: 14px 16px;
+      text-align: left;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    th:first-child { min-width: 180px; }
+
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    tr:hover td { background: rgba(124, 106, 255, 0.03); }
+
+    .file-name {
+      font-weight: 600;
+      color: var(--text);
+      font-size: 13px;
+    }
+
+    .check { color: var(--accent2); font-size: 16px; }
+    .cross { color: var(--text-dim); font-size: 16px; }
+    .partial { color: var(--accent4); font-size: 14px; }
+
+    .tool-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 500;
+      border: 1px solid;
+    }
+
+    .badge-scope {
+      background: rgba(124, 106, 255, 0.1);
+      border-color: rgba(124, 106, 255, 0.3);
+      color: #a899ff;
+    }
+
+    .badge-universal {
+      background: rgba(0, 212, 170, 0.1);
+      border-color: rgba(0, 212, 170, 0.3);
+      color: #00d4aa;
+    }
+
+    .badge-copilot {
+      background: rgba(35, 134, 54, 0.1);
+      border-color: rgba(35, 134, 54, 0.3);
+      color: #3fb950;
+    }
+
+    .badge-claude {
+      background: rgba(204, 120, 92, 0.1);
+      border-color: rgba(204, 120, 92, 0.3);
+      color: #cc785c;
+    }
+
+    .badge-gemini {
+      background: rgba(66, 133, 244, 0.1);
+      border-color: rgba(66, 133, 244, 0.3);
+      color: #60a5fa;
+    }
+
+    /* ===== FILE REFERENCE ===== */
+    .files-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .file-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .file-card:hover {
+      border-color: var(--border-bright);
+      transform: translateY(-2px);
+    }
+
+    .file-card-header {
+      padding: 20px 20px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .file-card-title {
+      font-family: var(--mono);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .file-card-path {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .owner-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    .file-card-body {
+      padding: 16px 20px;
+    }
+
+    .file-card-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+
+    .file-card-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .meta-tag {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.06em;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+    }
+
+    .file-card-snippet {
+      background: var(--surface2);
+      border-top: 1px solid var(--border);
+      padding: 14px 20px;
+    }
+
+    .snippet-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 8px;
+    }
+
+    pre {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.6;
+      overflow-x: auto;
+      white-space: pre-wrap;
+    }
+
+    pre .comment { color: var(--text-dim); }
+    pre .key { color: var(--accent2); }
+    pre .val { color: var(--accent4); }
+    pre .heading { color: var(--accent); font-weight: 600; }
+
+    /* ===== CHANGELOG ===== */
+    #changelog { background: var(--surface); }
+
+    .changelog-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .changelog-item {
+      display: grid;
+      grid-template-columns: 130px 90px 1fr;
+      gap: 1rem;
+      padding: 18px 24px;
+      border-bottom: 1px solid var(--border);
+      align-items: start;
+      transition: background 0.15s;
+    }
+
+    .changelog-item:last-child { border-bottom: none; }
+    .changelog-item:hover { background: rgba(124, 106, 255, 0.03); }
+
+    .change-date {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text-dim);
+      padding-top: 2px;
+    }
+
+    .change-type {
+      font-family: var(--mono);
+      font-size: 11px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      display: inline-block;
+      height: fit-content;
+    }
+
+    .type-new { background: rgba(0, 212, 170, 0.12); color: var(--accent2); border: 1px solid rgba(0, 212, 170, 0.25); }
+    .type-update { background: rgba(124, 106, 255, 0.12); color: var(--accent); border: 1px solid rgba(124, 106, 255, 0.25); }
+    .type-deprecated { background: rgba(255, 107, 107, 0.12); color: var(--accent3); border: 1px solid rgba(255, 107, 107, 0.25); }
+    .type-standard { background: rgba(255, 170, 68, 0.12); color: var(--accent4); border: 1px solid rgba(255, 170, 68, 0.25); }
+
+    .change-content {
+      font-size: 14px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .change-content strong { color: var(--text); font-weight: 600; }
+    .change-content span { color: var(--text-muted); font-size: 13px; display: block; margin-top: 3px; }
+
+    /* ===== TIPS ===== */
+    .tips-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1rem;
+    }
+
+    .tip-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .tip-icon {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .tip-title {
+      font-family: var(--display);
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .tip-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* ===== SYMLINK BOX ===== */
+    .symlink-box {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent);
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin-top: 2.5rem;
+    }
+
+    .symlink-box h3 {
+      font-family: var(--display);
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .symlink-box pre {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px 16px;
+      margin-top: 12px;
+      font-size: 12px;
+      color: var(--accent2);
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 2rem;
+      text-align: center;
+    }
+
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-note {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 1.8;
+    }
+
+    .footer-note a {
+      color: var(--text-muted);
+      text-decoration: none;
+    }
+    .footer-note a:hover { color: var(--text); }
+
+    /* DIVIDER */
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 0;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .stats-inner { gap: 2rem; }
+      .changelog-item { grid-template-columns: 1fr; gap: 6px; }
+      .change-date { display: none; }
+    }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .hero > * {
+      animation: fadeUp 0.5s ease forwards;
+    }
+    .hero > *:nth-child(1) { animation-delay: 0.1s; }
+    .hero > *:nth-child(2) { animation-delay: 0.2s; }
+    .hero > *:nth-child(3) { animation-delay: 0.3s; }
+    .hero > *:nth-child(4) { animation-delay: 0.4s; }
+
+    /* INLINE CODE */
+    code {
+      font-family: var(--mono);
+      font-size: 12px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      padding: 1px 6px;
+      border-radius: 4px;
+      color: var(--accent2);
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">// ai-agent-cheatsheet</a>
+    <ul class="nav-links">
+      <li><a href="#matrix">Matrix</a></li>
+      <li><a href="#files">File Reference</a></li>
+      <li><a href="#changelog">Changelog</a></li>
+      <li><a href="#tips">Tips</a></li>
+    </ul>
+    <span class="nav-badge">Last updated: Jun 2025</span>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-eyebrow">Community Reference</div>
+  <h1>AI Agent<br/><span>Instruction Files</span></h1>
+  <p class="hero-sub">
+    A cross-tool reference for <code>AGENTS.md</code>, <code>CLAUDE.md</code>,
+    <code>copilot-instructions.md</code>, <code>GEMINI.md</code>, and every other
+    file that tells your AI coding agents how to work.
+  </p>
+  <div class="hero-actions">
+    <a href="#matrix" class="btn btn-primary">↓ Compatibility Matrix</a>
+    <a href="#files" class="btn btn-outline">File Reference →</a>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat">
+      <div class="stat-num">10+</div>
+      <div class="stat-label">Instruction file types</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">6</div>
+      <div class="stat-label">Major tools covered</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">20k+</div>
+      <div class="stat-label">Repos using AGENTS.md</div>
+    </div>
+    <div class="stat">
+      <div class="stat-num">2025</div>
+      <div class="stat-label">Standard formalized</div>
+    </div>
+  </div>
+</div>
+
+<hr class="divider" />
+
+<!-- MATRIX -->
+<section id="matrix">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">// 01 — Compatibility</div>
+      <h2>Tool Compatibility Matrix</h2>
+      <p class="section-desc">Which files each AI coding tool reads natively. ✓ = native support, ~ = via symlink, — = not supported.</p>
+    </div>
+
+    <div class="matrix-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>File</th>
+            <th>Claude Code</th>
+            <th>GitHub Copilot</th>
+            <th>OpenAI Codex</th>
+            <th>Gemini CLI</th>
+            <th>Cursor</th>
+            <th>Windsurf</th>
+            <th>Scope</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="file-name">AGENTS.md</div>
+              <div style="font-size:11px;color:var(--text-muted);font-family:var(--mono);">repo root or subdirs</div>
+            </td>
+            <td><span class="partial">~</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="tool-badge badge-universal">Universal</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="file-name">CLAUDE.md</div>
+              <div style="font-size:11px;color:var(--text-muted);font-family:var(--mono);">root / ~/.claude / subdirs</div>
+            </td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="partial">~</span></td>
+            <td><span class="partial">~</span></td>
+            <td><span class="tool-badge badge-claude">Claude</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="file-name">.github/copilot-instructions.md</div>
+              <div style="font-size:11px;color:var(--text-muted);font-family:var(--mono);">.github/ folder</div>
+            </td>
+            <td><span class="cross">—</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="tool-badge badge-copilot">Copilot only</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="file-name">*.instructions.md</div>
+              <div style="font-size:11px;color:var(--text-muted);font-family:var(--mono);">.github/instructions/</div>
+            </td>
+            <td><span class="cross">—</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="tool-badge badge-copilot">Copilot only</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="file-name">*.agent.md</div>
+              <div style="font-size:11px;color:var(--text-muted);font-family:var(--mono);">.github/agents/</div>
+            </td>
+            <td><span class="cross">—</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="tool-badge badge-copilot">Copilot only</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="file-name">*.prompt.md</div>
+              <div style="font-size:11px;color:var(--text-muted);font-family:var(--mono);">.github/prompts/</div>
+            </td>
+            <td><span class="cross">—</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="tool-badge badge-copilot">Copilot only</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="file-name">GEMINI.md</div>
+              <div style="font-size:11px;color:var(--text-muted);font-family:var(--mono);">repo root</div>
+            </td>
+            <td><span class="cross">—</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="partial">~</span></td>
+            <td><span class="partial">~</span></td>
+            <td><span class="tool-badge badge-gemini">Gemini</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="file-name">SKILL.md</div>
+              <div style="font-size:11px;color:var(--text-muted);font-family:var(--mono);">.claude/skills/ or ~/.claude/skills/</div>
+            </td>
+            <td><span class="check">✓</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="tool-badge badge-universal">Shared</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="file-name">.claude/agents/*.md</div>
+              <div style="font-size:11px;color:var(--text-muted);font-family:var(--mono);">project or ~/.claude/agents/</div>
+            </td>
+            <td><span class="check">✓</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="tool-badge badge-claude">Claude only</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="file-name">.claude/commands/*.md</div>
+              <div style="font-size:11px;color:var(--text-muted);font-family:var(--mono);">project or ~/.claude/commands/</div>
+            </td>
+            <td><span class="check">✓</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="tool-badge badge-claude">Claude only</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="file-name">.cursor/rules/*.mdc</div>
+              <div style="font-size:11px;color:var(--text-muted);font-family:var(--mono);">.cursor/rules/</div>
+            </td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="tool-badge badge-scope">Cursor only</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="file-name">openai-codex/setup.sh</div>
+              <div style="font-size:11px;color:var(--text-muted);font-family:var(--mono);">repo root</div>
+            </td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="tool-badge badge-scope">Codex only</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="symlink-box">
+      <h3>⚡ Write once, use everywhere</h3>
+      <p style="font-size:13px;color:var(--text-muted);">Since tools read different filenames, use symlinks to keep a single source of truth. Most tools respect the nearest file in the directory tree.</p>
+      <pre># Write your instructions in AGENTS.md, then symlink for tool-specific filenames
+ln -s AGENTS.md CLAUDE.md
+ln -s AGENTS.md GEMINI.md
+
+# Or start from CLAUDE.md if you're Claude Code-first
+ln -s CLAUDE.md AGENTS.md</pre>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- FILE REFERENCE -->
+<section id="files">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">// 02 — File Reference</div>
+      <h2>Per-File Reference</h2>
+      <p class="section-desc">What each file does, where it lives, and a starter template you can copy.</p>
+    </div>
+
+    <div class="files-grid">
+
+      <!-- AGENTS.md -->
+      <div class="file-card">
+        <div class="file-card-header">
+          <div>
+            <div class="file-card-title">AGENTS.md</div>
+            <div class="file-card-path">/ or any subdirectory</div>
+          </div>
+          <div class="owner-dot" style="background:#00d4aa"></div>
+        </div>
+        <div class="file-card-body">
+          <p class="file-card-desc">The open standard. A README for agents. Supported by Copilot, Codex, Gemini CLI, Cursor, Windsurf, Zed, and more. Most-nested file takes precedence. Plain Markdown — no required schema.</p>
+          <div class="file-card-meta">
+            <span class="meta-tag">universal</span>
+            <span class="meta-tag">hierarchical</span>
+            <span class="meta-tag">open standard</span>
+          </div>
+        </div>
+        <div class="file-card-snippet">
+          <div class="snippet-label">Starter template</div>
+          <pre><span class="heading"># AGENTS.md</span>
+<span class="heading">## Project</span>
+<span class="val">Next.js 14 app with TypeScript + Postgres.</span>
+
+<span class="heading">## Commands</span>
+- Install: <span class="val">`pnpm install`</span>
+- Dev: <span class="val">`pnpm dev`</span>
+- Test: <span class="val">`pnpm test`</span>
+- Lint: <span class="val">`pnpm lint:fix`</span>
+
+<span class="heading">## Standards</span>
+- Named exports only
+- Zod for all validation
+- Tests required on all PRs</pre>
+        </div>
+      </div>
+
+      <!-- CLAUDE.md -->
+      <div class="file-card">
+        <div class="file-card-header">
+          <div>
+            <div class="file-card-title">CLAUDE.md</div>
+            <div class="file-card-path">root / ~/.claude / subdirs</div>
+          </div>
+          <div class="owner-dot" style="background:#cc785c"></div>
+        </div>
+        <div class="file-card-body">
+          <p class="file-card-desc">Claude Code's primary memory file. Loaded every session. Hierarchy: enterprise → user global (~/.claude/CLAUDE.md) → project root → subdirectory. More specific overrides broader. Target: under 300 lines.</p>
+          <div class="file-card-meta">
+            <span class="meta-tag">claude code</span>
+            <span class="meta-tag">auto-loaded</span>
+            <span class="meta-tag">hierarchical</span>
+          </div>
+        </div>
+        <div class="file-card-snippet">
+          <div class="snippet-label">Key sections</div>
+          <pre><span class="heading"># CLAUDE.md</span>
+<span class="comment"># Keep under 300 lines. Point to
+# other files for specific topics.</span>
+
+<span class="heading">## What this project is</span>
+<span class="val">One sentence overview.</span>
+
+<span class="heading">## How to run things</span>
+<span class="val">Exact commands only. No vague hints.</span>
+
+<span class="heading">## What NOT to do</span>
+<span class="val">NEVER modify /migrations directly.</span>
+
+<span class="heading">## More context</span>
+<span class="val">See agent_docs/ for detailed guides.</span></pre>
+        </div>
+      </div>
+
+      <!-- copilot-instructions.md -->
+      <div class="file-card">
+        <div class="file-card-header">
+          <div>
+            <div class="file-card-title">copilot-instructions.md</div>
+            <div class="file-card-path">.github/copilot-instructions.md</div>
+          </div>
+          <div class="owner-dot" style="background:#238636"></div>
+        </div>
+        <div class="file-card-body">
+          <p class="file-card-desc">Global instructions for all GitHub Copilot chat and the coding agent. Applied automatically to every request in the repo. One file, repo-wide scope only.</p>
+          <div class="file-card-meta">
+            <span class="meta-tag">github copilot</span>
+            <span class="meta-tag">repo-wide</span>
+            <span class="meta-tag">chat + agent</span>
+          </div>
+        </div>
+        <div class="file-card-snippet">
+          <div class="snippet-label">Starter template</div>
+          <pre><span class="comment"># Applied to all Copilot requests</span>
+
+<span class="val">We use Bazel for Java deps, not Maven.</span>
+<span class="val">JS uses double quotes + tab indentation.</span>
+<span class="val">We use Jira for issue tracking.</span>
+<span class="val">Run `npm test` before any PR.</span>
+<span class="val">All API routes live in /src/api/.</span></pre>
+        </div>
+      </div>
+
+      <!-- *.instructions.md -->
+      <div class="file-card">
+        <div class="file-card-header">
+          <div>
+            <div class="file-card-title">*.instructions.md</div>
+            <div class="file-card-path">.github/instructions/</div>
+          </div>
+          <div class="owner-dot" style="background:#238636"></div>
+        </div>
+        <div class="file-card-body">
+          <p class="file-card-desc">Path-specific instructions for Copilot. Uses YAML frontmatter with glob patterns to apply rules only to matching files. Multiple files, granular control. Use <code>excludeAgent</code> to exclude specific Copilot agents.</p>
+          <div class="file-card-meta">
+            <span class="meta-tag">github copilot</span>
+            <span class="meta-tag">path-scoped</span>
+            <span class="meta-tag">frontmatter</span>
+          </div>
+        </div>
+        <div class="file-card-snippet">
+          <div class="snippet-label">Example: models.instructions.md</div>
+          <pre><span class="comment">---</span>
+<span class="key">applyTo</span>: <span class="val">"src/models/**/*.ts"</span>
+<span class="key">excludeAgent</span>: <span class="val">"code-review"</span>
+<span class="comment">---</span>
+
+<span class="val">All models extend BaseModel.</span>
+<span class="val">Use Zod schemas for validation.</span>
+<span class="val">Export both type and schema.</span></pre>
+        </div>
+      </div>
+
+      <!-- GEMINI.md -->
+      <div class="file-card">
+        <div class="file-card-header">
+          <div>
+            <div class="file-card-title">GEMINI.md</div>
+            <div class="file-card-path">repo root</div>
+          </div>
+          <div class="owner-dot" style="background:#4285f4"></div>
+        </div>
+        <div class="file-card-body">
+          <p class="file-card-desc">Gemini CLI's equivalent of CLAUDE.md. Also read by GitHub Copilot when Gemini model is active. Same structure as AGENTS.md — plain Markdown, no required schema.</p>
+          <div class="file-card-meta">
+            <span class="meta-tag">gemini cli</span>
+            <span class="meta-tag">copilot gemini model</span>
+          </div>
+        </div>
+        <div class="file-card-snippet">
+          <div class="snippet-label">Structure mirrors AGENTS.md</div>
+          <pre><span class="heading"># GEMINI.md</span>
+<span class="comment"># Same structure as AGENTS.md.
+# Symlink if content is identical:</span>
+
+<span class="val">ln -s AGENTS.md GEMINI.md</span>
+
+<span class="comment"># Only create separately if you need
+# Gemini-specific instructions.</span></pre>
+        </div>
+      </div>
+
+      <!-- SKILL.md -->
+      <div class="file-card">
+        <div class="file-card-header">
+          <div>
+            <div class="file-card-title">SKILL.md</div>
+            <div class="file-card-path">.claude/skills/[name]/ or ~/.claude/skills/[name]/</div>
+          </div>
+          <div class="owner-dot" style="background:#7c6aff"></div>
+        </div>
+        <div class="file-card-body">
+          <p class="file-card-desc">Reusable skill bundles loaded on demand — not at every session start. A skill is a folder containing SKILL.md plus any helper files. Shared between Claude Code and GitHub Copilot. Think of it as loadable domain expertise.</p>
+          <div class="file-card-meta">
+            <span class="meta-tag">claude code</span>
+            <span class="meta-tag">github copilot</span>
+            <span class="meta-tag">on-demand</span>
+            <span class="meta-tag">portable</span>
+          </div>
+        </div>
+        <div class="file-card-snippet">
+          <div class="snippet-label">Structure: .claude/skills/docx/SKILL.md</div>
+          <pre><span class="comment">---</span>
+<span class="key">name</span>: <span class="val">docx</span>
+<span class="key">description</span>: <span class="val">Create Word documents</span>
+<span class="comment">---</span>
+
+<span class="comment"># Loaded when relevant to the task.
+# Include step-by-step instructions,
+# helper scripts, and example files
+# in the same folder.</span></pre>
+        </div>
+      </div>
+
+      <!-- .claude/agents -->
+      <div class="file-card">
+        <div class="file-card-header">
+          <div>
+            <div class="file-card-title">.claude/agents/*.md</div>
+            <div class="file-card-path">project or ~/.claude/agents/</div>
+          </div>
+          <div class="owner-dot" style="background:#cc785c"></div>
+        </div>
+        <div class="file-card-body">
+          <p class="file-card-desc">Custom subagents for Claude Code with isolated context. Defined via YAML frontmatter. Project agents (.claude/agents/) are version-controlled and team-shared. User agents (~/.claude/agents/) are personal and available in all projects.</p>
+          <div class="file-card-meta">
+            <span class="meta-tag">claude code</span>
+            <span class="meta-tag">subagents</span>
+            <span class="meta-tag">frontmatter</span>
+          </div>
+        </div>
+        <div class="file-card-snippet">
+          <div class="snippet-label">Example: .claude/agents/reviewer.md</div>
+          <pre><span class="comment">---</span>
+<span class="key">name</span>: <span class="val">code-reviewer</span>
+<span class="key">description</span>: <span class="val">Reviews PRs for bugs</span>
+<span class="key">model</span>: <span class="val">claude-sonnet-4</span>
+<span class="key">tools</span>: <span class="val">[read_file, bash]</span>
+<span class="comment">---</span>
+
+<span class="val">You are a principal-level code reviewer.
+Focus on bugs, security, and performance.
+Be specific — cite file and line number.</span></pre>
+        </div>
+      </div>
+
+      <!-- Cursor rules -->
+      <div class="file-card">
+        <div class="file-card-header">
+          <div>
+            <div class="file-card-title">.cursor/rules/*.mdc</div>
+            <div class="file-card-path">.cursor/rules/</div>
+          </div>
+          <div class="owner-dot" style="background:#8b5cf6"></div>
+        </div>
+        <div class="file-card-body">
+          <p class="file-card-desc">Cursor's rule system with four loading modes: Always (every context), Auto Attached (glob-matched files), Agent Requested (AI decides), Manual (explicit only). More granular than AGENTS.md for Cursor power users.</p>
+          <div class="file-card-meta">
+            <span class="meta-tag">cursor</span>
+            <span class="meta-tag">conditional loading</span>
+            <span class="meta-tag">4 modes</span>
+          </div>
+        </div>
+        <div class="file-card-snippet">
+          <div class="snippet-label">Example with frontmatter</div>
+          <pre><span class="comment">---</span>
+<span class="key">description</span>: <span class="val">DynamoDB model patterns</span>
+<span class="key">globs</span>: <span class="val">"src/models/**/*.py"</span>
+<span class="key">alwaysApply</span>: <span class="val">false</span>
+<span class="comment">---</span>
+
+<span class="val">Use PynamoDB for all DynamoDB models.
+Hash key must be named `pk`, range `sk`.</span></pre>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- CHANGELOG -->
+<section id="changelog">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">// 03 — Changelog</div>
+      <h2>What's Changed</h2>
+      <p class="section-desc">Major changes to the ecosystem. This space moves fast — bookmark and check back.</p>
+    </div>
+
+    <div class="changelog-list">
+      <div class="changelog-item">
+        <div class="change-date">Aug 2025</div>
+        <div><span class="change-type type-standard">Standard</span></div>
+        <div class="change-content">
+          <strong>AGENTS.md formalized as open standard</strong>
+          <span>Collaborative effort between OpenAI, Google, Cursor, Factory, and Sourcegraph. Now maintained under the Agentic AI Foundation / Linux Foundation. 20,000+ repos adopted.</span>
+        </div>
+      </div>
+      <div class="changelog-item">
+        <div class="change-date">Aug 2025</div>
+        <div><span class="change-type type-new">New</span></div>
+        <div class="change-content">
+          <strong>GitHub Copilot adds native AGENTS.md support</strong>
+          <span>Copilot coding agent now reads AGENTS.md in addition to copilot-instructions.md, CLAUDE.md, and GEMINI.md.</span>
+        </div>
+      </div>
+      <div class="changelog-item">
+        <div class="change-date">Dec 2025</div>
+        <div><span class="change-type type-new">New</span></div>
+        <div class="change-content">
+          <strong>GitHub Copilot Agent Skills launched</strong>
+          <span>Copilot now supports SKILL.md — the same format as Claude Code skills. Skills in .claude/skills/ are automatically picked up by both tools.</span>
+        </div>
+      </div>
+      <div class="changelog-item">
+        <div class="change-date">Nov 2025</div>
+        <div><span class="change-type type-update">Update</span></div>
+        <div class="change-content">
+          <strong>Copilot adds excludeAgent property to *.instructions.md</strong>
+          <span>Fine-grained control over which Copilot agent (chat, code review, coding agent) uses a given instructions file.</span>
+        </div>
+      </div>
+      <div class="changelog-item">
+        <div class="change-date">Jul 2025</div>
+        <div><span class="change-type type-new">New</span></div>
+        <div class="change-content">
+          <strong>Copilot coding agent adds *.instructions.md support</strong>
+          <span>Path-specific instructions via YAML frontmatter applyTo glob patterns. Stored in .github/instructions/.</span>
+        </div>
+      </div>
+      <div class="changelog-item">
+        <div class="change-date">Early 2025</div>
+        <div><span class="change-type type-new">New</span></div>
+        <div class="change-content">
+          <strong>Claude Code 2.0 released with subagents and skills</strong>
+          <span>Introduced .claude/agents/, .claude/commands/, and .claude/skills/ directory conventions. Skills shareable across claude.ai, Claude Code, and Claude Desktop.</span>
+        </div>
+      </div>
+      <div class="changelog-item">
+        <div class="change-date">2024</div>
+        <div><span class="change-type type-deprecated">Deprecated</span></div>
+        <div class="change-content">
+          <strong>.cursorrules file deprecated by Cursor</strong>
+          <span>Replaced by the more powerful .cursor/rules/*.mdc system with four loading modes and glob-based conditional application.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- TIPS -->
+<section id="tips">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">// 04 — Best Practices</div>
+      <h2>Tips That Actually Matter</h2>
+      <p class="section-desc">Distilled from real-world usage and analysis of thousands of repos.</p>
+    </div>
+
+    <div class="tips-grid">
+      <div class="tip-card">
+        <div class="tip-icon">🪶</div>
+        <div class="tip-title">Keep it short</div>
+        <p class="tip-desc">Every line in your memory file competes with actual work for context window. Target under 300 lines for CLAUDE.md. Under 200 lines before splitting into subdirectory files for AGENTS.md.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🔗</div>
+        <div class="tip-title">Point, don't paste</div>
+        <p class="tip-desc">Reference other files instead of inlining content. Keep task-specific docs in <code>agent_docs/</code> and list them in your root file. Agents read what's relevant; unused context is wasted tokens.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🚫</div>
+        <div class="tip-title">Never use for code style</div>
+        <p class="tip-desc">Don't put linting rules or formatting preferences in instruction files. Use ESLint, Prettier, or your formatter. LLMs are slow and expensive compared to deterministic tools. Reserve instructions for what only a human can explain.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">⚡</div>
+        <div class="tip-title">Commands, not descriptions</div>
+        <p class="tip-desc">Write the exact command (<code>pnpm test --run --no-color</code>), not a description of what it does. Include flags. Agents use these literally — vague wording causes hallucinated flags.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">📁</div>
+        <div class="tip-title">Use hierarchy for monorepos</div>
+        <p class="tip-desc">Place additional AGENTS.md files in subdirectories. The nearest file in the directory tree wins. OpenAI's own repo uses 88 AGENTS.md files. Don't try to cover everything from the root.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🔄</div>
+        <div class="tip-title">Treat it like code</div>
+        <p class="tip-desc">Update instruction files in the same PR as the process change. Review them in code review. Audit quarterly. Outdated instructions actively hurt agent performance — worse than no instructions at all.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🧱</div>
+        <div class="tip-title">Set clear boundaries</div>
+        <p class="tip-desc">Tell agents what NOT to do as explicitly as what to do. Include a "never do" section. Tell agents when to ask for human review rather than proceeding. Agents that know their limits are more reliable.</p>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🔑</div>
+        <div class="tip-title">Never commit secrets</div>
+        <p class="tip-desc">These files go into your system prompt and are version-controlled. Never include API keys, passwords, connection strings, or security vulnerability details. Treat the file as public documentation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <p class="footer-note">
+      Community reference by <a href="https://github.com/thegoo" target="_blank">@thegoo</a> — not affiliated with Anthropic, GitHub, Google, or OpenAI.<br/>
+      Sources: <a href="https://agents.md" target="_blank">agents.md</a> ·
+      <a href="https://github.com/agentsmd/agents.md" target="_blank">agentsmd/agents.md</a> ·
+      <a href="https://docs.github.com/copilot" target="_blank">GitHub Copilot Docs</a> ·
+      <a href="https://code.claude.com/docs" target="_blank">Claude Code Docs</a> ·
+      <a href="https://github.com/github/awesome-copilot" target="_blank">awesome-copilot</a><br/>
+      <br/>
+      PRs welcome · Keep it accurate · Keep it current
+    </p>
+  </div>
+</footer>
+
+</body>
+</html>
