@@ -463,6 +463,38 @@
       color: var(--text-muted);
     }
 
+    .file-card-docs {
+      padding: 10px 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .docs-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-right: 2px;
+    }
+
+    .doc-link {
+      font-family: var(--mono);
+      font-size: 10px;
+      color: var(--accent);
+      text-decoration: none;
+      border: 1px solid rgba(124,106,255,0.3);
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: rgba(124,106,255,0.06);
+      transition: background 0.15s;
+    }
+
+    .doc-link:hover { background: rgba(124,106,255,0.15); }
+
     .file-card-snippet {
       background: var(--surface2);
       border-top: 1px solid var(--border);
@@ -1100,6 +1132,12 @@ ln -s CLAUDE.md AGENTS.md</pre>
             <span class="meta-tag">open standard</span>
           </div>
         </div>
+        <div class="file-card-docs">
+          <span class="docs-label">Docs</span>
+          <a href="https://agents.md/" target="_blank" rel="noopener" class="doc-link">agents.md ↗</a>
+          <a href="https://github.com/agentsmd/agents.md" target="_blank" rel="noopener" class="doc-link">GitHub ↗</a>
+          <a href="https://developers.openai.com/codex/guides/agents-md/" target="_blank" rel="noopener" class="doc-link">OpenAI Codex Guide ↗</a>
+        </div>
         <div class="file-card-snippet">
           <div class="snippet-label">Starter template</div>
           <pre><span class="heading"># AGENTS.md</span>
@@ -1135,6 +1173,12 @@ ln -s CLAUDE.md AGENTS.md</pre>
             <span class="meta-tag">auto-loaded</span>
             <span class="meta-tag">hierarchical</span>
           </div>
+        </div>
+        <div class="file-card-docs">
+          <span class="docs-label">Docs</span>
+          <a href="https://docs.anthropic.com/en/docs/claude-code/memory" target="_blank" rel="noopener" class="doc-link">Memory & CLAUDE.md ↗</a>
+          <a href="https://docs.anthropic.com/en/docs/claude-code/overview" target="_blank" rel="noopener" class="doc-link">Claude Code Docs ↗</a>
+          <a href="https://github.com/anthropics/claude-code" target="_blank" rel="noopener" class="doc-link">GitHub ↗</a>
         </div>
         <div class="file-card-snippet">
           <div class="snippet-label">Key sections</div>
@@ -1173,6 +1217,11 @@ ln -s CLAUDE.md AGENTS.md</pre>
             <span class="meta-tag">chat + agent</span>
           </div>
         </div>
+        <div class="file-card-docs">
+          <span class="docs-label">Docs</span>
+          <a href="https://docs.github.com/copilot/customizing-copilot/adding-custom-instructions-for-github-copilot" target="_blank" rel="noopener" class="doc-link">GitHub Docs ↗</a>
+          <a href="https://docs.github.com/en/copilot/reference/custom-instructions-support" target="_blank" rel="noopener" class="doc-link">Support Matrix ↗</a>
+        </div>
         <div class="file-card-snippet">
           <div class="snippet-label">Starter template</div>
           <pre><span class="comment"># Applied to all Copilot requests</span>
@@ -1202,6 +1251,12 @@ ln -s CLAUDE.md AGENTS.md</pre>
             <span class="meta-tag">frontmatter</span>
           </div>
         </div>
+        <div class="file-card-docs">
+          <span class="docs-label">Docs</span>
+          <a href="https://docs.github.com/en/copilot/tutorials/use-custom-instructions" target="_blank" rel="noopener" class="doc-link">Custom Instructions Guide ↗</a>
+          <a href="https://docs.github.com/en/copilot/reference/custom-instructions-support" target="_blank" rel="noopener" class="doc-link">Support Matrix ↗</a>
+          <a href="https://github.blog/changelog/2025-11-12-copilot-code-review-and-coding-agent-now-support-agent-specific-instructions/" target="_blank" rel="noopener" class="doc-link">excludeAgent Announcement ↗</a>
+        </div>
         <div class="file-card-snippet">
           <div class="snippet-label">Example: models.instructions.md</div>
           <pre><span class="comment">---</span>
@@ -1230,6 +1285,12 @@ ln -s CLAUDE.md AGENTS.md</pre>
             <span class="meta-tag">gemini cli</span>
             <span class="meta-tag">copilot gemini model</span>
           </div>
+        </div>
+        <div class="file-card-docs">
+          <span class="docs-label">Docs</span>
+          <a href="https://geminicli.com/docs/cli/gemini-md/" target="_blank" rel="noopener" class="doc-link">Gemini CLI Docs ↗</a>
+          <a href="https://github.com/google-gemini/gemini-cli/blob/main/docs/cli/gemini-md.md" target="_blank" rel="noopener" class="doc-link">GitHub ↗</a>
+          <a href="https://github.com/google-gemini/gemini-cli" target="_blank" rel="noopener" class="doc-link">gemini-cli Repo ↗</a>
         </div>
         <div class="file-card-snippet">
           <div class="snippet-label">Structure mirrors AGENTS.md</div>
@@ -1262,6 +1323,13 @@ ln -s CLAUDE.md AGENTS.md</pre>
             <span class="meta-tag">portable</span>
           </div>
         </div>
+        <div class="file-card-docs">
+          <span class="docs-label">Docs</span>
+          <a href="https://docs.anthropic.com/en/docs/claude-code/skills" target="_blank" rel="noopener" class="doc-link">Claude Code Skills ↗</a>
+          <a href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/create-skills" target="_blank" rel="noopener" class="doc-link">Copilot Agent Skills ↗</a>
+          <a href="https://github.com/anthropics/skills" target="_blank" rel="noopener" class="doc-link">anthropics/skills ↗</a>
+          <a href="https://code.visualstudio.com/docs/copilot/customization/agent-skills" target="_blank" rel="noopener" class="doc-link">VS Code Skills ↗</a>
+        </div>
         <div class="file-card-snippet">
           <div class="snippet-label">Structure: .github/skills/api-tests/SKILL.md</div>
           <pre><span class="comment">---</span>
@@ -1292,6 +1360,11 @@ ln -s CLAUDE.md AGENTS.md</pre>
             <span class="meta-tag">subagents</span>
             <span class="meta-tag">frontmatter</span>
           </div>
+        </div>
+        <div class="file-card-docs">
+          <span class="docs-label">Docs</span>
+          <a href="https://docs.anthropic.com/en/docs/claude-code/sub-agents" target="_blank" rel="noopener" class="doc-link">Subagents Docs ↗</a>
+          <a href="https://github.com/anthropics/claude-code" target="_blank" rel="noopener" class="doc-link">GitHub ↗</a>
         </div>
         <div class="file-card-snippet">
           <div class="snippet-label">Example: .claude/agents/reviewer.md</div>
@@ -1324,6 +1397,10 @@ Be specific — cite file and line number.</span></pre>
             <span class="meta-tag">conditional loading</span>
             <span class="meta-tag">4 modes</span>
           </div>
+        </div>
+        <div class="file-card-docs">
+          <span class="docs-label">Docs</span>
+          <a href="https://docs.cursor.com/context/rules" target="_blank" rel="noopener" class="doc-link">Cursor Rules Docs ↗</a>
         </div>
         <div class="file-card-snippet">
           <div class="snippet-label">Example with frontmatter</div>
@@ -1604,6 +1681,8 @@ Hash key must be named `pk`, range `sk`.</span></pre>
         <div class="change-content">
           <strong>GitHub Copilot SDK enters technical preview</strong>
           <span>Embeds Copilot's full agentic runtime (planning, tool use, file edits, memory) into any application. Available in Python, TypeScript, Go, and .NET. Supports BYOK for OpenAI, Azure AI Foundry, and Anthropic models.</span>
+          <a href="https://github.blog/news-insights/company-news/build-an-agent-into-any-app-with-the-github-copilot-sdk/" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">Announcement ↗</a>
+          <a href="https://github.com/github/copilot-sdk" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">GitHub ↗</a>
         </div>
       </div>
       <div class="changelog-item">
@@ -1612,22 +1691,27 @@ Hash key must be named `pk`, range `sk`.</span></pre>
         <div class="change-content">
           <strong>AGENTS.md formalized as open standard</strong>
           <span>Collaborative effort between OpenAI, Google, Cursor, Factory, and Sourcegraph. Now maintained under the Agentic AI Foundation / Linux Foundation. 20,000+ repos adopted.</span>
+          <a href="https://agents.md/" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">agents.md ↗</a>
+          <a href="https://github.com/agentsmd/agents.md" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">GitHub ↗</a>
         </div>
       </div>
       <div class="changelog-item">
-        <div class="change-date">Aug 2025</div>
+        <div class="change-date">Aug 28, 2025</div>
         <div><span class="change-type type-new">New</span></div>
         <div class="change-content">
           <strong>GitHub Copilot adds native AGENTS.md support</strong>
           <span>Copilot coding agent now reads AGENTS.md in addition to copilot-instructions.md, CLAUDE.md, and GEMINI.md.</span>
+          <a href="https://github.blog/changelog/2025-08-28-copilot-coding-agent-now-supports-agents-md-custom-instructions/" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">Changelog ↗</a>
         </div>
       </div>
       <div class="changelog-item">
-        <div class="change-date">Dec 2025</div>
+        <div class="change-date">Dec 18, 2025</div>
         <div><span class="change-type type-new">New</span></div>
         <div class="change-content">
           <strong>GitHub Copilot Agent Skills launched</strong>
           <span>Copilot now supports <code>SKILL.md</code> natively — the same format as Claude Code skills. Store project skills in <code>.github/skills/</code> or <code>.claude/skills/</code>; personal skills in <code>~/.copilot/skills/</code>. Invoke with <code>/skill-name</code> in chat or let Copilot auto-load based on the <code>description</code> frontmatter field.</span>
+          <a href="https://github.blog/changelog/2025-12-18-github-copilot-now-supports-agent-skills/" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">Changelog ↗</a>
+          <a href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/create-skills" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">Docs ↗</a>
         </div>
       </div>
       <div class="changelog-item">
@@ -1636,14 +1720,16 @@ Hash key must be named `pk`, range `sk`.</span></pre>
         <div class="change-content">
           <strong>AGENTS.md donated to Linux Foundation / Agentic AI Foundation</strong>
           <span>OpenAI contributed AGENTS.md to the newly formed AAIF alongside Anthropic's MCP. Platinum members include AWS, Anthropic, Google, Microsoft, and OpenAI. Adoption now exceeds 60,000 open-source projects.</span>
+          <a href="https://aaif.org/" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">AAIF ↗</a>
         </div>
       </div>
-            <div class="changelog-item">
+      <div class="changelog-item">
         <div class="change-date">Nov 2025</div>
         <div><span class="change-type type-update">Update</span></div>
         <div class="change-content">
           <strong>Copilot adds excludeAgent property to *.instructions.md</strong>
           <span>Fine-grained control over which Copilot agent (chat, code review, coding agent) uses a given instructions file.</span>
+          <a href="https://github.blog/changelog/2025-11-12-copilot-code-review-and-coding-agent-now-support-agent-specific-instructions/" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">Changelog ↗</a>
         </div>
       </div>
       <div class="changelog-item">
@@ -1652,6 +1738,7 @@ Hash key must be named `pk`, range `sk`.</span></pre>
         <div class="change-content">
           <strong>Copilot coding agent adds *.instructions.md support</strong>
           <span>Path-specific instructions via YAML frontmatter applyTo glob patterns. Stored in .github/instructions/.</span>
+          <a href="https://docs.github.com/copilot/customizing-copilot/adding-custom-instructions-for-github-copilot" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">Docs ↗</a>
         </div>
       </div>
       <div class="changelog-item">
@@ -1660,6 +1747,8 @@ Hash key must be named `pk`, range `sk`.</span></pre>
         <div class="change-content">
           <strong>Claude Code 2.0 released with subagents and skills</strong>
           <span>Introduced .claude/agents/, .claude/commands/, and .claude/skills/ directory conventions. Skills shareable across claude.ai, Claude Code, and Claude Desktop.</span>
+          <a href="https://docs.anthropic.com/en/docs/claude-code/overview" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">Claude Code Docs ↗</a>
+          <a href="https://github.com/anthropics/claude-code" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">GitHub ↗</a>
         </div>
       </div>
       <div class="changelog-item">
@@ -1668,6 +1757,7 @@ Hash key must be named `pk`, range `sk`.</span></pre>
         <div class="change-content">
           <strong>.cursorrules file deprecated by Cursor</strong>
           <span>Replaced by the more powerful .cursor/rules/*.mdc system with four loading modes and glob-based conditional application.</span>
+          <a href="https://docs.cursor.com/context/rules" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">Cursor Rules Docs ↗</a>
         </div>
       </div>
     </div>
