@@ -2,7 +2,7 @@
 
 A community-maintained reference for AI agent instruction files across all major tools.
 
-**Live site:** `https://thegoo.github.io/ai-agent-cheatsheet`
+**Live site:** [https://thegoo.github.io/ai-agent-cheatsheet](https://thegoo.github.io/ai-agent-cheatsheet)
 
 ## What's covered
 
