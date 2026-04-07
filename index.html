@@ -862,7 +862,7 @@
       <li><a href="#changelog">Changelog</a></li>
       <li><a href="https://github.com/thegoo/ai-agent-cheatsheet" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
     </ul>
-    <span class="nav-badge">Last updated: Mar 2026</span>
+    <span class="nav-badge">Last updated: 06 April 2026</span>
   </div>
 </nav>
 
@@ -1023,14 +1023,14 @@
           <tr>
             <td>
               <div class="file-name">SKILL.md</div>
-              <div style="font-size:11px;color:var(--text-muted);font-family:var(--mono);">.github/skills/ · .claude/skills/ · ~/.copilot/skills/</div>
+              <div style="font-size:11px;color:var(--text-muted);font-family:var(--mono);">.github/skills/ · .claude/skills/ · .windsurf/skills/ · ~/.copilot/skills/ · Microsoft Agent Framework (✓ native)</div>
             </td>
             <td><span class="check">✓</span></td>
             <td><span class="check">✓</span></td>
             <td><span class="cross">—</span></td>
             <td><span class="cross">—</span></td>
             <td><span class="cross">—</span></td>
-            <td><span class="cross">—</span></td>
+            <td><span class="check">✓</span></td>
             <td><span class="tool-badge badge-universal">Shared</span></td>
           </tr>
           <tr>
@@ -1471,7 +1471,7 @@ Hash key must be named `pk`, range `sk`.</span></pre>
           <a href="https://github.com/bradygaster/squad" target="_blank" class="project-link">github.com/bradygaster/squad ↗</a>
         </div>
         <div class="project-card-body">
-          <p class="project-desc">An AI team framework built on top of GitHub Copilot. You describe what you're building and Squad proposes a named team of specialist agents — each with a defined role, its own memory, and shared decision logs. Agents persist across sessions as files in your repo, learning your codebase over time. Integrates with GitHub Issues via labels: tag an issue <code>squad</code> and the lead agent triages and assigns it automatically. Can include <code>@copilot</code> as a team member for autonomous coding tasks.</p>
+          <p class="project-desc">An AI team framework built on top of GitHub Copilot. You describe what you're building and Squad proposes a named team of specialist agents — each with a defined role, its own memory, and shared decision logs. Agents persist across sessions as files in your repo, learning your codebase over time. Integrates with GitHub Issues via labels: tag an issue <code>squad</code> and the lead agent triages and assigns it automatically. Can include <code>@copilot</code> as a team member for autonomous coding tasks. TypeScript SDK-first mode available via <code>squad.config.ts</code>. Featured on the GitHub Blog (March 2026).</p>
           <div class="project-compat">
             <div class="compat-label">Tool compatibility</div>
             <div class="compat-tags">
@@ -1482,7 +1482,7 @@ Hash key must be named `pk`, range `sk`.</span></pre>
             </div>
           </div>
           <div class="project-detail-row">
-            <span class="detail-pill">Install: <code>npx github:bradygaster/squad</code></span>
+            <span class="detail-pill">Install: <code>npm install -g @bradygaster/squad-cli</code></span>
             <span class="detail-pill">Docs: <a href="https://bradygaster.github.io/squad/" target="_blank">bradygaster.github.io/squad</a></span>
           </div>
         </div>
@@ -1675,6 +1675,25 @@ Hash key must be named `pk`, range `sk`.</span></pre>
     </div>
 
     <div class="changelog-list">
+      <div class="changelog-item">
+        <div class="change-date">Apr 3, 2026</div>
+        <div><span class="change-type type-new">New</span></div>
+        <div class="change-content">
+          <strong>Microsoft Agent Framework 1.0 GA</strong>
+          <span>The unified successor to Semantic Kernel and AutoGen ships production-ready for .NET and Python, with stable APIs and a long-term support commitment. Includes native SKILL.md support via <code>FileAgentSkillsProvider</code> — same progressive disclosure pattern as Claude Code and Copilot. AGENTS.md read natively for project instructions. Semantic Kernel and AutoGen enter maintenance mode.</span>
+          <a href="https://devblogs.microsoft.com/agent-framework/microsoft-agent-framework-version-1-0/" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">Announcement ↗</a>
+          <a href="https://github.com/microsoft/agent-framework" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">GitHub ↗</a>
+        </div>
+      </div>
+      <div class="changelog-item">
+        <div class="change-date">Mar 11, 2026</div>
+        <div><span class="change-type type-new">New</span></div>
+        <div class="change-content">
+          <strong>Copilot for JetBrains adds AGENTS.md and CLAUDE.md support</strong>
+          <span>The March JetBrains update adds native support for AGENTS.md and CLAUDE.md instruction files, including nested file discovery and auto-generation of an initial AGENTS.md. A <code>/memory</code> slash command provides quick access to manage instruction files. Copilot auto-discovers and loads instruction files into context during agent workflows.</span>
+          <a href="https://github.blog/changelog/2026-03-11-major-agentic-capabilities-improvements-in-github-copilot-for-jetbrains-ides/" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">Changelog ↗</a>
+        </div>
+      </div>
       <div class="changelog-item">
         <div class="change-date">Mar 18, 2026</div>
         <div><span class="change-type type-new">New</span></div>
