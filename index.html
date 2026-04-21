@@ -862,7 +862,7 @@
       <li><a href="#changelog">Changelog</a></li>
       <li><a href="https://github.com/thegoo/ai-agent-cheatsheet" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
     </ul>
-    <span class="nav-badge">Last updated: 06 April 2026</span>
+    <span class="nav-badge">Last updated: 20 April 2026</span>
   </div>
 </nav>
 
@@ -1084,6 +1084,19 @@
             <td><span class="cross">—</span></td>
             <td><span class="cross">—</span></td>
             <td><span class="tool-badge badge-scope">Codex only</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="file-name">.github/agents/*.agent.md</div>
+              <div style="font-size:11px;color:var(--text-muted);font-family:var(--mono);">.github/agents/ · ~/.copilot/agents/</div>
+            </td>
+            <td><span class="cross">—</span></td>
+            <td><span class="check">✓</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="cross">—</span></td>
+            <td><span class="tool-badge badge-scope">Copilot only</span></td>
           </tr>
         </tbody>
       </table>
@@ -1415,6 +1428,47 @@ Hash key must be named `pk`, range `sk`.</span></pre>
         </div>
       </div>
 
+      <!-- .github/agents/.agent.md -->
+      <div class="file-card">
+        <div class="file-card-header">
+          <div>
+            <div class="file-card-title">.github/agents/*.agent.md</div>
+            <div class="file-card-path">.github/agents/ · ~/.copilot/agents/</div>
+          </div>
+          <div class="owner-dot" style="background:#2d7dd2"></div>
+        </div>
+        <div class="file-card-body">
+          <p class="file-card-desc">GitHub Copilot's custom agent format, GA as of April 2026. Defines specialized personas with their own tool restrictions, model preferences, and handoffs between agents. Replaces the deprecated <code>.chatmode.md</code> format. Project agents live in <code>.github/agents/</code> and are team-shared; personal agents go in <code>~/.copilot/agents/</code>. Directly parallels Claude Code's <code>.claude/agents/*.md</code>.</p>
+          <div class="file-card-meta">
+            <span class="meta-tag">github copilot</span>
+            <span class="meta-tag">custom agents</span>
+            <span class="meta-tag">frontmatter</span>
+            <span class="meta-tag">replaces .chatmode.md</span>
+          </div>
+        </div>
+        <div class="file-card-docs">
+          <span class="docs-label">Docs</span>
+          <a href="https://code.visualstudio.com/docs/copilot/customization/custom-agents" target="_blank" rel="noopener" class="doc-link">VS Code Custom Agents ↗</a>
+          <a href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/cloud-agent/create-custom-agents" target="_blank" rel="noopener" class="doc-link">GitHub Docs ↗</a>
+        </div>
+        <div class="file-card-snippet">
+          <div class="snippet-label">Example: .github/agents/security-scout.agent.md</div>
+          <pre><span class="comment">---</span>
+<span class="key">name</span>: <span class="val">Security Scout</span>
+<span class="key">description</span>: <span class="val">Finds SQLi and XSS vulnerabilities</span>
+<span class="key">tools</span>: <span class="val">[read, search]</span>
+<span class="key">model</span>: <span class="val">claude-sonnet-4.6</span>
+<span class="key">handoffs</span>:
+  - <span class="key">label</span>: <span class="val">Fix Issues</span>
+    <span class="key">agent</span>: <span class="val">code-fixer</span>
+<span class="comment">---</span>
+
+<span class="val">You are a Senior Security Engineer.
+Always check /src/auth first.
+Provide a remediation plan for every bug.</span></pre>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -1703,6 +1757,25 @@ Hash key must be named `pk`, range `sk`.</span></pre>
     </div>
 
     <div class="changelog-list">
+      <div class="changelog-item">
+        <div class="change-date">Apr 16, 2026</div>
+        <div><span class="change-type type-new">New</span></div>
+        <div class="change-content">
+          <strong>GitHub CLI adds <code>gh skill</code> command for SKILL.md management</strong>
+          <span>A new <code>gh skill</code> command brings package-manager-style tooling to agent skills: install, search, preview, publish, and version-pin to a tag or commit SHA. Skills auto-install to the correct directory per agent host. Supply-chain security features built in — use <code>--agent</code> and <code>--scope</code> flags to target Claude Code, Copilot, or others directly.</span>
+          <a href="https://github.blog/changelog/2026-04-16-manage-agent-skills-with-github-cli/" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">Changelog ↗</a>
+        </div>
+      </div>
+      <div class="changelog-item">
+        <div class="change-date">Apr 1, 2026</div>
+        <div><span class="change-type type-new">New</span></div>
+        <div class="change-content">
+          <strong>GitHub Copilot <code>.agent.md</code> goes first-class; <code>.chatmode.md</code> deprecated</strong>
+          <span>Custom agents defined as <code>.agent.md</code> files in <code>.github/agents/</code> are now GA across VS Code, Visual Studio, and JetBrains. YAML frontmatter defines name, description, tools, model, and handoffs between agents. The previous <code>.chatmode.md</code> format is deprecated — rename existing files to <code>.agent.md</code> to continue using them. Directly mirrors Claude Code's <code>.claude/agents/*.md</code> pattern.</span>
+          <a href="https://code.visualstudio.com/docs/copilot/customization/custom-agents" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">VS Code Docs ↗</a>
+          <a href="https://github.blog/changelog/month/04-2026/" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">GitHub Changelog ↗</a>
+        </div>
+      </div>
       <div class="changelog-item">
         <div class="change-date">Apr 3, 2026</div>
         <div><span class="change-type type-new">New</span></div>
