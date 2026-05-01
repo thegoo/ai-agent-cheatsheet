@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AI Agent Instruction Files — The Developer Reference</title>
-  <meta name="description" content="A community reference covering AI agent instruction files: AGENTS.md, CLAUDE.md, copilot-instructions.md, GEMINI.md and more. Cross-tool compatibility matrix, templates, and changelog." />
+  <title>AI Agent Developer Reference — Tools, Files, Orchestration</title>
+  <meta name="description" content="The community reference for AI coding agents. Instruction files, tool landscape, orchestration patterns, compatibility matrix, and changelog. AGENTS.md, CLAUDE.md, Copilot, Codex, Cursor, Windsurf and more." />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=Syne:wght@400;600;700;800&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
@@ -27,15 +27,14 @@
       --gemini: #4285f4;
       --codex: #10a37f;
       --cursor: #8b5cf6;
+      --windsurf: #06b6d4;
       --mono: 'IBM Plex Mono', monospace;
       --display: 'Syne', sans-serif;
       --body: 'Inter', sans-serif;
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     html { scroll-behavior: smooth; }
-
     body {
       background: var(--bg);
       color: var(--text);
@@ -45,7 +44,6 @@
       overflow-x: hidden;
     }
 
-    /* NOISE TEXTURE */
     body::before {
       content: '';
       position: fixed;
@@ -65,7 +63,6 @@
       border-bottom: 1px solid var(--border);
       padding: 0 2rem;
     }
-
     .nav-inner {
       max-width: 1200px;
       margin: 0 auto;
@@ -74,7 +71,6 @@
       justify-content: space-between;
       height: 56px;
     }
-
     .nav-logo {
       font-family: var(--mono);
       font-size: 13px;
@@ -83,13 +79,11 @@
       letter-spacing: 0.05em;
       text-decoration: none;
     }
-
     .nav-links {
       display: flex;
-      gap: 2rem;
+      gap: 1.6rem;
       list-style: none;
     }
-
     .nav-links a {
       font-family: var(--mono);
       font-size: 12px;
@@ -99,9 +93,7 @@
       text-transform: uppercase;
       transition: color 0.2s;
     }
-
     .nav-links a:hover { color: var(--text); }
-
     .nav-badge {
       font-family: var(--mono);
       font-size: 11px;
@@ -119,7 +111,6 @@
       text-align: center;
       overflow: hidden;
     }
-
     .hero::before {
       content: '';
       position: absolute;
@@ -131,7 +122,6 @@
       background: radial-gradient(ellipse at center, rgba(124, 106, 255, 0.12) 0%, transparent 70%);
       pointer-events: none;
     }
-
     .hero-eyebrow {
       font-family: var(--mono);
       font-size: 11px;
@@ -143,9 +133,7 @@
       align-items: center;
       gap: 8px;
     }
-
-    .hero-eyebrow::before,
-    .hero-eyebrow::after {
+    .hero-eyebrow::before, .hero-eyebrow::after {
       content: '';
       display: block;
       width: 30px;
@@ -153,7 +141,6 @@
       background: var(--accent);
       opacity: 0.5;
     }
-
     h1 {
       font-family: var(--display);
       font-size: clamp(2.4rem, 5vw, 4rem);
@@ -162,29 +149,25 @@
       letter-spacing: -0.02em;
       margin-bottom: 1.5rem;
     }
-
     h1 span {
       background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
-
     .hero-sub {
       font-size: 17px;
       color: var(--text-muted);
-      max-width: 580px;
+      max-width: 620px;
       margin: 0 auto 2.5rem;
       line-height: 1.7;
     }
-
     .hero-actions {
       display: flex;
       gap: 1rem;
       justify-content: center;
       flex-wrap: wrap;
     }
-
     .btn {
       font-family: var(--mono);
       font-size: 12px;
@@ -199,19 +182,9 @@
       align-items: center;
       gap: 8px;
     }
-
-    .btn-primary {
-      background: var(--accent);
-      color: white;
-      border: 1px solid var(--accent);
-    }
+    .btn-primary { background: var(--accent); color: white; border: 1px solid var(--accent); }
     .btn-primary:hover { background: #9580ff; }
-
-    .btn-outline {
-      background: transparent;
-      color: var(--text-muted);
-      border: 1px solid var(--border);
-    }
+    .btn-outline { background: transparent; color: var(--text-muted); border: 1px solid var(--border); }
     .btn-outline:hover { border-color: var(--border-bright); color: var(--text); }
 
     /* STATS BAR */
@@ -221,7 +194,6 @@
       background: var(--surface);
       padding: 1.2rem 2rem;
     }
-
     .stats-inner {
       max-width: 1200px;
       margin: 0 auto;
@@ -230,18 +202,13 @@
       gap: 4rem;
       flex-wrap: wrap;
     }
-
-    .stat {
-      text-align: center;
-    }
-
+    .stat { text-align: center; }
     .stat-num {
       font-family: var(--display);
       font-size: 1.6rem;
       font-weight: 800;
       color: var(--text);
     }
-
     .stat-label {
       font-family: var(--mono);
       font-size: 11px;
@@ -251,21 +218,10 @@
       margin-top: 2px;
     }
 
-    /* MAIN LAYOUT */
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 2rem;
-    }
-
-    section {
-      padding: 80px 2rem;
-    }
-
-    .section-header {
-      margin-bottom: 3rem;
-    }
-
+    /* LAYOUT */
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+    section { padding: 80px 2rem; }
+    .section-header { margin-bottom: 3rem; }
     .section-tag {
       font-family: var(--mono);
       font-size: 11px;
@@ -274,7 +230,6 @@
       color: var(--accent);
       margin-bottom: 0.8rem;
     }
-
     h2 {
       font-family: var(--display);
       font-size: clamp(1.6rem, 3vw, 2.2rem);
@@ -282,35 +237,23 @@
       letter-spacing: -0.02em;
       margin-bottom: 0.75rem;
     }
+    .section-desc { color: var(--text-muted); max-width: 600px; font-size: 15px; }
 
-    .section-desc {
-      color: var(--text-muted);
-      max-width: 600px;
-      font-size: 15px;
-    }
-
-    /* ===== COMPATIBILITY MATRIX ===== */
+    /* MATRIX */
     #matrix { background: var(--surface); }
-
     .matrix-wrap {
       overflow-x: auto;
       border-radius: 12px;
       border: 1px solid var(--border);
     }
-
     table {
       width: 100%;
       border-collapse: collapse;
       font-family: var(--mono);
       font-size: 12px;
-      min-width: 700px;
+      min-width: 800px;
     }
-
-    thead tr {
-      background: var(--surface2);
-      border-bottom: 1px solid var(--border);
-    }
-
+    thead tr { background: var(--surface2); border-bottom: 1px solid var(--border); }
     th {
       padding: 14px 16px;
       text-align: left;
@@ -320,29 +263,18 @@
       color: var(--text-muted);
       white-space: nowrap;
     }
-
     th:first-child { min-width: 180px; }
-
     td {
       padding: 12px 16px;
       border-bottom: 1px solid var(--border);
       vertical-align: middle;
     }
-
     tr:last-child td { border-bottom: none; }
-
     tr:hover td { background: rgba(124, 106, 255, 0.03); }
-
-    .file-name {
-      font-weight: 600;
-      color: var(--text);
-      font-size: 13px;
-    }
-
+    .file-name { font-weight: 600; color: var(--text); font-size: 13px; }
     .check { color: var(--accent2); font-size: 16px; }
     .cross { color: var(--text-dim); font-size: 16px; }
     .partial { color: var(--accent4); font-size: 14px; }
-
     .tool-badge {
       display: inline-flex;
       align-items: center;
@@ -353,44 +285,18 @@
       font-weight: 500;
       border: 1px solid;
     }
+    .badge-scope { background: rgba(124,106,255,0.1); border-color: rgba(124,106,255,0.3); color: #a899ff; }
+    .badge-universal { background: rgba(0,212,170,0.1); border-color: rgba(0,212,170,0.3); color: #00d4aa; }
+    .badge-copilot { background: rgba(35,134,54,0.1); border-color: rgba(35,134,54,0.3); color: #3fb950; }
+    .badge-claude { background: rgba(204,120,92,0.1); border-color: rgba(204,120,92,0.3); color: #cc785c; }
+    .badge-gemini { background: rgba(66,133,244,0.1); border-color: rgba(66,133,244,0.3); color: #60a5fa; }
 
-    .badge-scope {
-      background: rgba(124, 106, 255, 0.1);
-      border-color: rgba(124, 106, 255, 0.3);
-      color: #a899ff;
-    }
-
-    .badge-universal {
-      background: rgba(0, 212, 170, 0.1);
-      border-color: rgba(0, 212, 170, 0.3);
-      color: #00d4aa;
-    }
-
-    .badge-copilot {
-      background: rgba(35, 134, 54, 0.1);
-      border-color: rgba(35, 134, 54, 0.3);
-      color: #3fb950;
-    }
-
-    .badge-claude {
-      background: rgba(204, 120, 92, 0.1);
-      border-color: rgba(204, 120, 92, 0.3);
-      color: #cc785c;
-    }
-
-    .badge-gemini {
-      background: rgba(66, 133, 244, 0.1);
-      border-color: rgba(66, 133, 244, 0.3);
-      color: #60a5fa;
-    }
-
-    /* ===== FILE REFERENCE ===== */
+    /* FILE CARDS */
     .files-grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
       gap: 1.5rem;
     }
-
     .file-card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -398,12 +304,7 @@
       overflow: hidden;
       transition: border-color 0.2s, transform 0.2s;
     }
-
-    .file-card:hover {
-      border-color: var(--border-bright);
-      transform: translateY(-2px);
-    }
-
+    .file-card:hover { border-color: var(--border-bright); transform: translateY(-2px); }
     .file-card-header {
       padding: 20px 20px 16px;
       border-bottom: 1px solid var(--border);
@@ -412,46 +313,12 @@
       justify-content: space-between;
       gap: 12px;
     }
-
-    .file-card-title {
-      font-family: var(--mono);
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .file-card-path {
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
-
-    .owner-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      flex-shrink: 0;
-      margin-top: 6px;
-    }
-
-    .file-card-body {
-      padding: 16px 20px;
-    }
-
-    .file-card-desc {
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.6;
-      margin-bottom: 14px;
-    }
-
-    .file-card-meta {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
+    .file-card-title { font-family: var(--mono); font-size: 14px; font-weight: 600; color: var(--text); }
+    .file-card-path { font-family: var(--mono); font-size: 11px; color: var(--text-muted); margin-top: 4px; }
+    .owner-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; }
+    .file-card-body { padding: 16px 20px; }
+    .file-card-desc { font-size: 13px; color: var(--text-muted); line-height: 1.6; margin-bottom: 14px; }
+    .file-card-meta { display: flex; flex-wrap: wrap; gap: 6px; }
     .meta-tag {
       font-family: var(--mono);
       font-size: 10px;
@@ -462,7 +329,6 @@
       border: 1px solid var(--border);
       color: var(--text-muted);
     }
-
     .file-card-docs {
       padding: 10px 20px;
       border-top: 1px solid var(--border);
@@ -471,7 +337,6 @@
       gap: 8px;
       align-items: center;
     }
-
     .docs-label {
       font-family: var(--mono);
       font-size: 10px;
@@ -480,7 +345,6 @@
       color: var(--text-dim);
       margin-right: 2px;
     }
-
     .doc-link {
       font-family: var(--mono);
       font-size: 10px;
@@ -492,15 +356,8 @@
       background: rgba(124,106,255,0.06);
       transition: background 0.15s;
     }
-
     .doc-link:hover { background: rgba(124,106,255,0.15); }
-
-    .file-card-snippet {
-      background: var(--surface2);
-      border-top: 1px solid var(--border);
-      padding: 14px 20px;
-    }
-
+    .file-card-snippet { background: var(--surface2); border-top: 1px solid var(--border); padding: 14px 20px; }
     .snippet-label {
       font-family: var(--mono);
       font-size: 10px;
@@ -509,7 +366,6 @@
       color: var(--text-dim);
       margin-bottom: 8px;
     }
-
     pre {
       font-family: var(--mono);
       font-size: 11px;
@@ -518,15 +374,327 @@
       overflow-x: auto;
       white-space: pre-wrap;
     }
-
     pre .comment { color: var(--text-dim); }
     pre .key { color: var(--accent2); }
     pre .val { color: var(--accent4); }
     pre .heading { color: var(--accent); font-weight: 600; }
 
-    /* ===== CHANGELOG ===== */
-    #changelog { background: var(--surface); }
+    /* ===== TOOL LANDSCAPE ===== */
+    #tools { background: var(--bg); }
 
+    .tool-category-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .tool-category-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .tool-category-card:hover { border-color: var(--border-bright); transform: translateY(-2px); }
+
+    .tool-category-header {
+      padding: 16px 18px 12px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .tool-category-icon {
+      font-size: 18px;
+      line-height: 1;
+    }
+
+    .tool-category-name {
+      font-family: var(--display);
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .tool-category-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-top: 2px;
+    }
+
+    .tool-category-body { padding: 14px 18px 16px; }
+
+    .tool-entry {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .tool-entry:last-child { border-bottom: none; padding-bottom: 0; }
+
+    .tool-color-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 5px;
+    }
+
+    .tool-entry-name {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.3;
+    }
+
+    .tool-entry-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      line-height: 1.4;
+      margin-top: 2px;
+    }
+
+    .tool-entry-files {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 5px;
+    }
+
+    .tool-file-tag {
+      font-family: var(--mono);
+      font-size: 9px;
+      padding: 1px 5px;
+      border-radius: 3px;
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+    }
+
+    /* PARALLEL AGENT COMPARISON TABLE */
+    .comparison-wrap {
+      overflow-x: auto;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      margin-top: 0.5rem;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--mono);
+      font-size: 12px;
+      min-width: 900px;
+    }
+
+    .comparison-table thead tr {
+      background: var(--surface2);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .comparison-table th {
+      padding: 14px 14px;
+      text-align: left;
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+
+    .comparison-table th:first-child { min-width: 160px; }
+
+    .comparison-table td {
+      padding: 11px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+      font-size: 11px;
+      line-height: 1.5;
+      color: var(--text-muted);
+    }
+
+    .comparison-table tr:last-child td { border-bottom: none; }
+    .comparison-table tr:hover td { background: rgba(124, 106, 255, 0.03); }
+
+    .tool-name-cell {
+      font-weight: 600;
+      color: var(--text);
+      font-size: 12px;
+    }
+
+    .tool-type-tag {
+      font-size: 9px;
+      padding: 1px 6px;
+      border-radius: 3px;
+      border: 1px solid;
+      display: inline-block;
+      margin-top: 3px;
+      letter-spacing: 0.06em;
+    }
+
+    .tag-cli { background: rgba(0,212,170,0.08); border-color: rgba(0,212,170,0.25); color: var(--accent2); }
+    .tag-ide { background: rgba(124,106,255,0.08); border-color: rgba(124,106,255,0.25); color: #a899ff; }
+    .tag-cloud { background: rgba(255,170,68,0.08); border-color: rgba(255,170,68,0.25); color: var(--accent4); }
+    .tag-framework { background: rgba(255,107,107,0.08); border-color: rgba(255,107,107,0.25); color: var(--accent3); }
+
+    .val-yes { color: var(--accent2); }
+    .val-no { color: var(--text-dim); }
+    .val-partial { color: var(--accent4); }
+
+    /* ===== ORCHESTRATION PATTERNS ===== */
+    #orchestration { background: var(--surface); }
+
+    .pattern-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 3rem;
+    }
+
+    .pattern-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .pattern-card:hover { border-color: var(--border-bright); }
+
+    .pattern-card-header {
+      padding: 20px 20px 16px;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .pattern-num {
+      font-family: var(--mono);
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--border-bright);
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .pattern-title {
+      font-family: var(--display);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .pattern-subtitle {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.04em;
+    }
+
+    .pattern-card-body { padding: 18px 20px; }
+
+    .pattern-when {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 6px;
+    }
+
+    .pattern-use-cases {
+      list-style: none;
+      margin-bottom: 16px;
+    }
+
+    .pattern-use-cases li {
+      font-size: 13px;
+      color: var(--text-muted);
+      padding: 3px 0;
+      padding-left: 14px;
+      position: relative;
+      line-height: 1.5;
+    }
+
+    .pattern-use-cases li::before {
+      content: '→';
+      position: absolute;
+      left: 0;
+      color: var(--text-dim);
+      font-family: var(--mono);
+      font-size: 11px;
+    }
+
+    .pattern-tools-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 8px;
+    }
+
+    .pattern-tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 16px;
+    }
+
+    .pattern-tool-tag {
+      font-family: var(--mono);
+      font-size: 11px;
+      padding: 3px 10px;
+      border-radius: 4px;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      background: var(--surface);
+    }
+
+    .pattern-file-row {
+      border-top: 1px solid var(--border);
+      padding-top: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .pattern-file-label {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      flex-shrink: 0;
+    }
+
+    .pattern-file-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+
+    .pattern-file-chip {
+      font-family: var(--mono);
+      font-size: 10px;
+      padding: 2px 7px;
+      border-radius: 3px;
+      background: rgba(124,106,255,0.08);
+      border: 1px solid rgba(124,106,255,0.2);
+      color: #a899ff;
+    }
+
+    /* CHANGELOG */
+    #changelog { background: var(--bg); }
     .changelog-list {
       display: flex;
       flex-direction: column;
@@ -535,27 +703,18 @@
       border-radius: 12px;
       overflow: hidden;
     }
-
     .changelog-item {
       display: grid;
-      grid-template-columns: 130px 90px 1fr;
+      grid-template-columns: 130px 100px 1fr;
       gap: 1rem;
       padding: 18px 24px;
       border-bottom: 1px solid var(--border);
       align-items: start;
       transition: background 0.15s;
     }
-
     .changelog-item:last-child { border-bottom: none; }
     .changelog-item:hover { background: rgba(124, 106, 255, 0.03); }
-
-    .change-date {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--text-dim);
-      padding-top: 2px;
-    }
-
+    .change-date { font-family: var(--mono); font-size: 12px; color: var(--text-dim); padding-top: 2px; }
     .change-type {
       font-family: var(--mono);
       font-size: 11px;
@@ -565,38 +724,27 @@
       display: inline-block;
       height: fit-content;
     }
-
-    .type-new { background: rgba(0, 212, 170, 0.12); color: var(--accent2); border: 1px solid rgba(0, 212, 170, 0.25); }
-    .type-update { background: rgba(124, 106, 255, 0.12); color: var(--accent); border: 1px solid rgba(124, 106, 255, 0.25); }
-    .type-deprecated { background: rgba(255, 107, 107, 0.12); color: var(--accent3); border: 1px solid rgba(255, 107, 107, 0.25); }
-    .type-standard { background: rgba(255, 170, 68, 0.12); color: var(--accent4); border: 1px solid rgba(255, 170, 68, 0.25); }
-
-    .change-content {
-      font-size: 14px;
-      color: var(--text);
-      line-height: 1.5;
-    }
-
+    .type-new { background: rgba(0,212,170,0.12); color: var(--accent2); border: 1px solid rgba(0,212,170,0.25); }
+    .type-update { background: rgba(124,106,255,0.12); color: var(--accent); border: 1px solid rgba(124,106,255,0.25); }
+    .type-deprecated { background: rgba(255,107,107,0.12); color: var(--accent3); border: 1px solid rgba(255,107,107,0.25); }
+    .type-standard { background: rgba(255,170,68,0.12); color: var(--accent4); border: 1px solid rgba(255,170,68,0.25); }
+    .type-tool { background: rgba(6,182,212,0.12); color: #22d3ee; border: 1px solid rgba(6,182,212,0.25); }
+    .type-pattern { background: rgba(139,92,246,0.12); color: #a78bfa; border: 1px solid rgba(139,92,246,0.25); }
+    .change-content { font-size: 14px; color: var(--text); line-height: 1.5; }
     .change-content strong { color: var(--text); font-weight: 600; }
     .change-content span { color: var(--text-muted); font-size: 13px; display: block; margin-top: 3px; }
 
-    /* ===== PROJECTS ===== */
-    .projects-grid {
-      display: flex;
-      flex-direction: column;
-      gap: 1.5rem;
-    }
-
+    /* PROJECTS */
+    #projects { background: var(--surface); }
+    .projects-grid { display: flex; flex-direction: column; gap: 1.5rem; }
     .project-card {
-      background: var(--surface);
+      background: var(--bg);
       border: 1px solid var(--border);
       border-radius: 12px;
       overflow: hidden;
       transition: border-color 0.2s;
     }
-
     .project-card:hover { border-color: var(--border-bright); }
-
     .project-card-header {
       display: flex;
       align-items: flex-start;
@@ -606,27 +754,10 @@
       border-bottom: 1px solid var(--border);
       flex-wrap: wrap;
     }
-
-    .project-name {
-      font-family: var(--display);
-      font-size: 16px;
-      font-weight: 700;
-      color: var(--text);
-    }
-
-    .project-owner {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
-
-    .project-owner a {
-      color: var(--accent);
-      text-decoration: none;
-    }
+    .project-name { font-family: var(--display); font-size: 16px; font-weight: 700; color: var(--text); }
+    .project-owner { font-family: var(--mono); font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+    .project-owner a { color: var(--accent); text-decoration: none; }
     .project-owner a:hover { color: #9580ff; }
-
     .project-link {
       font-family: var(--mono);
       font-size: 11px;
@@ -640,73 +771,18 @@
       margin-top: 2px;
     }
     .project-link:hover { border-color: var(--accent); color: var(--accent); }
-
-    .project-card-body {
-      padding: 18px 24px 20px;
-    }
-
-    .project-desc {
-      font-size: 14px;
-      color: var(--text-muted);
-      line-height: 1.7;
-      margin-bottom: 16px;
-    }
-
+    .project-card-body { padding: 18px 24px 20px; }
+    .project-desc { font-size: 14px; color: var(--text-muted); line-height: 1.7; margin-bottom: 16px; }
     .project-desc a { color: var(--accent2); text-decoration: none; }
     .project-desc a:hover { text-decoration: underline; }
-
-    .project-compat {
-      margin-bottom: 14px;
-    }
-
-    .compat-label {
-      font-family: var(--mono);
-      font-size: 10px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--text-dim);
-      margin-bottom: 8px;
-    }
-
-    .compat-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-
-    .compat-tag {
-      font-family: var(--mono);
-      font-size: 11px;
-      padding: 3px 10px;
-      border-radius: 4px;
-      border: 1px solid;
-    }
-
-    .compat-tag.supported {
-      background: rgba(0, 212, 170, 0.08);
-      border-color: rgba(0, 212, 170, 0.25);
-      color: var(--accent2);
-    }
-
-    .compat-tag.not-supported {
-      background: rgba(85, 85, 112, 0.15);
-      border-color: var(--border);
-      color: var(--text-dim);
-    }
-
-    .compat-tag.partial-support {
-      background: rgba(255, 170, 68, 0.08);
-      border-color: rgba(255, 170, 68, 0.25);
-      color: var(--accent4);
-    }
-
-    .project-detail-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 4px;
-    }
-
+    .project-compat { margin-bottom: 14px; }
+    .compat-label { font-family: var(--mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-dim); margin-bottom: 8px; }
+    .compat-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+    .compat-tag { font-family: var(--mono); font-size: 11px; padding: 3px 10px; border-radius: 4px; border: 1px solid; }
+    .compat-tag.supported { background: rgba(0,212,170,0.08); border-color: rgba(0,212,170,0.25); color: var(--accent2); }
+    .compat-tag.not-supported { background: rgba(85,85,112,0.15); border-color: var(--border); color: var(--text-dim); }
+    .compat-tag.partial-support { background: rgba(255,170,68,0.08); border-color: rgba(255,170,68,0.25); color: var(--accent4); }
+    .project-detail-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
     .detail-pill {
       font-family: var(--mono);
       font-size: 11px;
@@ -716,43 +792,10 @@
       padding: 3px 10px;
       border-radius: 4px;
     }
-
     .detail-pill a { color: var(--accent2); text-decoration: none; }
     .detail-pill a:hover { text-decoration: underline; }
 
-    /* ===== TIPS ===== */
-    .tips-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1rem;
-    }
-
-    .tip-card {
-      background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 20px;
-    }
-
-    .tip-icon {
-      font-size: 22px;
-      margin-bottom: 12px;
-    }
-
-    .tip-title {
-      font-family: var(--display);
-      font-size: 15px;
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
-
-    .tip-desc {
-      font-size: 13px;
-      color: var(--text-muted);
-      line-height: 1.6;
-    }
-
-    /* ===== SYMLINK BOX ===== */
+    /* SYMLINK BOX */
     .symlink-box {
       background: var(--surface2);
       border: 1px solid var(--border);
@@ -761,80 +804,8 @@
       padding: 20px 24px;
       margin-top: 2.5rem;
     }
-
-    .symlink-box h3 {
-      font-family: var(--display);
-      font-size: 15px;
-      font-weight: 600;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .symlink-box pre {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 6px;
-      padding: 14px 16px;
-      margin-top: 12px;
-      font-size: 12px;
-      color: var(--accent2);
-    }
-
-    /* FOOTER */
-    footer {
-      border-top: 1px solid var(--border);
-      padding: 2.5rem 2rem;
-      text-align: center;
-    }
-
-    .footer-inner {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .footer-note {
-      font-family: var(--mono);
-      font-size: 12px;
-      color: var(--text-dim);
-      line-height: 1.8;
-    }
-
-    .footer-note a {
-      color: var(--text-muted);
-      text-decoration: none;
-    }
-    .footer-note a:hover { color: var(--text); }
-
-    /* DIVIDER */
-    .divider {
-      border: none;
-      border-top: 1px solid var(--border);
-      margin: 0;
-    }
-
-    /* RESPONSIVE */
-    @media (max-width: 768px) {
-      .nav-links { display: none; }
-      .stats-inner { gap: 2rem; }
-      .changelog-item { grid-template-columns: 1fr; gap: 6px; }
-      .change-date { display: none; }
-    }
-
-    /* ANIMATIONS */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    .hero > * {
-      animation: fadeUp 0.5s ease forwards;
-    }
-    .hero > *:nth-child(1) { animation-delay: 0.1s; }
-    .hero > *:nth-child(2) { animation-delay: 0.2s; }
-    .hero > *:nth-child(3) { animation-delay: 0.3s; }
-    .hero > *:nth-child(4) { animation-delay: 0.4s; }
+    .symlink-box h3 { font-family: var(--display); font-size: 15px; font-weight: 600; margin-bottom: 12px; display: flex; align-items: center; gap: 8px; }
+    .symlink-box pre { background: var(--bg); border: 1px solid var(--border); border-radius: 6px; padding: 14px 16px; margin-top: 12px; font-size: 12px; color: var(--accent2); }
 
     /* INLINE CODE */
     code {
@@ -846,6 +817,140 @@
       border-radius: 4px;
       color: var(--accent2);
     }
+
+    /* DIVIDER */
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+    /* SUBSECTION HEADER */
+    .subsection-header {
+      margin: 2.5rem 0 1.5rem;
+    }
+    .subsection-title {
+      font-family: var(--display);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 0.4rem;
+    }
+    .subsection-desc { font-size: 13px; color: var(--text-muted); }
+
+    /* TIPS SECTION */
+    #tips { background: var(--bg); }
+
+    .tips-two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    @media (max-width: 900px) {
+      .tips-two-col { grid-template-columns: 1fr; gap: 2rem; }
+    }
+
+    .tips-col-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 1.2rem;
+      padding-bottom: 0.8rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tips-col-title {
+      font-family: var(--display);
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .tips-col-badge {
+      font-family: var(--mono);
+      font-size: 10px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    .badge-basics {
+      background: rgba(0,212,170,0.1);
+      border: 1px solid rgba(0,212,170,0.25);
+      color: var(--accent2);
+    }
+
+    .badge-pro {
+      background: rgba(124,106,255,0.1);
+      border: 1px solid rgba(124,106,255,0.25);
+      color: var(--accent);
+    }
+
+    .tip-item {
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .tip-item:last-child { border-bottom: none; }
+
+    .tip-item-title {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 5px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .tip-item-body {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .tip-item-body code {
+      font-size: 11px;
+    }
+
+    .tip-pro-callout {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
+      margin-top: 10px;
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--accent2);
+      line-height: 1.7;
+    }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 2.5rem 2rem; text-align: center; }
+    .footer-inner { max-width: 1200px; margin: 0 auto; }
+    .footer-note { font-family: var(--mono); font-size: 12px; color: var(--text-dim); line-height: 1.8; }
+    .footer-note a { color: var(--text-muted); text-decoration: none; }
+    .footer-note a:hover { color: var(--text); }
+
+    /* ANIMATIONS */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .hero > * { animation: fadeUp 0.5s ease forwards; }
+    .hero > *:nth-child(1) { animation-delay: 0.1s; }
+    .hero > *:nth-child(2) { animation-delay: 0.2s; }
+    .hero > *:nth-child(3) { animation-delay: 0.3s; }
+    .hero > *:nth-child(4) { animation-delay: 0.4s; }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+      .stats-inner { gap: 2rem; }
+      .changelog-item { grid-template-columns: 1fr; gap: 6px; }
+      .change-date { display: none; }
+      .pattern-grid { grid-template-columns: 1fr; }
+      .tool-category-grid { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -856,28 +961,30 @@
     <a href="#" class="nav-logo">// ai-agent-cheatsheet</a>
     <ul class="nav-links">
       <li><a href="#matrix">Matrix</a></li>
-      <li><a href="#files">File Reference</a></li>
+      <li><a href="#files">Files</a></li>
+      <li><a href="#tools">Tools</a></li>
+      <li><a href="#orchestration">Orchestration</a></li>
       <li><a href="#projects">Projects</a></li>
       <li><a href="#tips">Tips</a></li>
       <li><a href="#changelog">Changelog</a></li>
       <li><a href="https://github.com/thegoo/ai-agent-cheatsheet" target="_blank" rel="noopener noreferrer">GitHub ↗</a></li>
     </ul>
-    <span class="nav-badge">Last updated: 20 April 2026</span>
+    <span class="nav-badge">Last updated: 25 April 2026</span>
   </div>
 </nav>
 
 <!-- HERO -->
 <div class="hero">
   <div class="hero-eyebrow">Community Reference</div>
-  <h1>AI Agent<br/><span>Instruction Files</span></h1>
+  <h1>The Developer Reference<br/><span>for AI Coding Agents</span></h1>
   <p class="hero-sub">
-    A cross-tool reference for <code>AGENTS.md</code>, <code>CLAUDE.md</code>,
-    <code>copilot-instructions.md</code>, <code>GEMINI.md</code>, and every other
-    file that tells your AI coding agents how to work.
+    Cut through the noise. Tools, instruction files, orchestration patterns,
+    and what actually changed this week — all in one place.
   </p>
   <div class="hero-actions">
     <a href="#matrix" class="btn btn-primary">↓ Compatibility Matrix</a>
-    <a href="#files" class="btn btn-outline">File Reference →</a>
+    <a href="#tools" class="btn btn-outline">Tool Landscape →</a>
+    <a href="#orchestration" class="btn btn-outline">Orchestration →</a>
   </div>
 </div>
 
@@ -889,16 +996,16 @@
       <div class="stat-label">Instruction file types</div>
     </div>
     <div class="stat">
-      <div class="stat-num">6</div>
-      <div class="stat-label">Major tools covered</div>
+      <div class="stat-num">15+</div>
+      <div class="stat-label">Tools covered</div>
     </div>
     <div class="stat">
-      <div class="stat-num">60k+</div>
-      <div class="stat-label">Repos using AGENTS.md</div>
+      <div class="stat-num">3</div>
+      <div class="stat-label">Orchestration patterns</div>
     </div>
     <div class="stat">
-      <div class="stat-num">2025</div>
-      <div class="stat-label">Standard formalized</div>
+      <div class="stat-num">Weekly</div>
+      <div class="stat-label">Ecosystem scans</div>
     </div>
   </div>
 </div>
@@ -911,7 +1018,7 @@
     <div class="section-header">
       <div class="section-tag">// 01 — Compatibility</div>
       <h2>Tool Compatibility Matrix</h2>
-      <p class="section-desc">Which files each AI coding tool reads natively. ✓ = native support, ~ = via symlink, — = not supported.</p>
+      <p class="section-desc">Which files each AI coding tool reads natively. ✓ = native support, ~ = via symlink or convention, — = not supported.</p>
     </div>
 
     <div class="matrix-wrap">
@@ -1023,7 +1130,7 @@
           <tr>
             <td>
               <div class="file-name">SKILL.md</div>
-              <div style="font-size:11px;color:var(--text-muted);font-family:var(--mono);">.github/skills/ · .claude/skills/ · .windsurf/skills/ · ~/.copilot/skills/ · Microsoft Agent Framework (✓ native)</div>
+              <div style="font-size:11px;color:var(--text-muted);font-family:var(--mono);">.github/skills/ · .claude/skills/ · .windsurf/skills/</div>
             </td>
             <td><span class="check">✓</span></td>
             <td><span class="check">✓</span></td>
@@ -1154,6 +1261,7 @@ ln -s CLAUDE.md AGENTS.md</pre>
         <div class="file-card-snippet">
           <div class="snippet-label">Starter template</div>
           <pre><span class="heading"># AGENTS.md</span>
+
 <span class="heading">## Project</span>
 <span class="val">Next.js 14 app with TypeScript + Postgres.</span>
 
@@ -1191,7 +1299,6 @@ ln -s CLAUDE.md AGENTS.md</pre>
           <span class="docs-label">Docs</span>
           <a href="https://docs.anthropic.com/en/docs/claude-code/memory" target="_blank" rel="noopener" class="doc-link">Memory & CLAUDE.md ↗</a>
           <a href="https://docs.anthropic.com/en/docs/claude-code/overview" target="_blank" rel="noopener" class="doc-link">Claude Code Docs ↗</a>
-          <a href="https://github.com/anthropics/claude-code" target="_blank" rel="noopener" class="doc-link">GitHub ↗</a>
         </div>
         <div class="file-card-snippet">
           <div class="snippet-label">Key sections</div>
@@ -1238,7 +1345,6 @@ ln -s CLAUDE.md AGENTS.md</pre>
         <div class="file-card-snippet">
           <div class="snippet-label">Starter template</div>
           <pre><span class="comment"># Applied to all Copilot requests</span>
-
 <span class="val">We use Bazel for Java deps, not Maven.</span>
 <span class="val">JS uses double quotes + tab indentation.</span>
 <span class="val">We use Jira for issue tracking.</span>
@@ -1257,7 +1363,7 @@ ln -s CLAUDE.md AGENTS.md</pre>
           <div class="owner-dot" style="background:#238636"></div>
         </div>
         <div class="file-card-body">
-          <p class="file-card-desc">Path-specific instructions for Copilot. Uses YAML frontmatter with glob patterns to apply rules only to matching files. Multiple files, granular control. Use <code>excludeAgent</code> to exclude specific Copilot agents.</p>
+          <p class="file-card-desc">Path-specific instructions for Copilot. Uses YAML frontmatter with glob patterns to apply rules only to matching files. Multiple files, granular control. Use <code>excludeAgent</code> to exclude specific agents.</p>
           <div class="file-card-meta">
             <span class="meta-tag">github copilot</span>
             <span class="meta-tag">path-scoped</span>
@@ -1268,7 +1374,6 @@ ln -s CLAUDE.md AGENTS.md</pre>
           <span class="docs-label">Docs</span>
           <a href="https://docs.github.com/en/copilot/tutorials/use-custom-instructions" target="_blank" rel="noopener" class="doc-link">Custom Instructions Guide ↗</a>
           <a href="https://docs.github.com/en/copilot/reference/custom-instructions-support" target="_blank" rel="noopener" class="doc-link">Support Matrix ↗</a>
-          <a href="https://github.blog/changelog/2025-11-12-copilot-code-review-and-coding-agent-now-support-agent-specific-instructions/" target="_blank" rel="noopener" class="doc-link">excludeAgent Announcement ↗</a>
         </div>
         <div class="file-card-snippet">
           <div class="snippet-label">Example: models.instructions.md</div>
@@ -1301,7 +1406,6 @@ ln -s CLAUDE.md AGENTS.md</pre>
         </div>
         <div class="file-card-docs">
           <span class="docs-label">Docs</span>
-          <a href="https://geminicli.com/docs/cli/gemini-md/" target="_blank" rel="noopener" class="doc-link">Gemini CLI Docs ↗</a>
           <a href="https://github.com/google-gemini/gemini-cli/blob/main/docs/cli/gemini-md.md" target="_blank" rel="noopener" class="doc-link">GitHub ↗</a>
           <a href="https://github.com/google-gemini/gemini-cli" target="_blank" rel="noopener" class="doc-link">gemini-cli Repo ↗</a>
         </div>
@@ -1323,17 +1427,17 @@ ln -s CLAUDE.md AGENTS.md</pre>
         <div class="file-card-header">
           <div>
             <div class="file-card-title">SKILL.md</div>
-            <div class="file-card-path">.github/skills/[name]/ · .claude/skills/[name]/ · ~/.copilot/skills/ · ~/.claude/skills/</div>
+            <div class="file-card-path">.github/skills/ · .claude/skills/ · .windsurf/skills/ · ~/.copilot/skills/</div>
           </div>
           <div class="owner-dot" style="background:#7c6aff"></div>
         </div>
         <div class="file-card-body">
-          <p class="file-card-desc">Reusable skill bundles loaded on demand — not at every session start. A skill is a folder containing <code>SKILL.md</code> plus any helper scripts or resource files. Portable across Claude Code and GitHub Copilot (Copilot CLI, coding agent, VS Code agent mode). Each tool uses the YAML frontmatter <code>description</code> field to decide when to load the skill. Copilot also supports manual invocation via <code>/skill-name</code> in chat. Project skills are repo-scoped; personal skills (in <code>~/.copilot/skills/</code> or <code>~/.claude/skills/</code>) apply across all projects.</p>
+          <p class="file-card-desc">Reusable skill bundles loaded on demand. A skill is a folder containing <code>SKILL.md</code> plus helper scripts. Portable across Claude Code, GitHub Copilot, and Windsurf. The <code>description</code> frontmatter field controls when the skill auto-loads.</p>
           <div class="file-card-meta">
             <span class="meta-tag">claude code</span>
             <span class="meta-tag">github copilot</span>
+            <span class="meta-tag">windsurf</span>
             <span class="meta-tag">on-demand</span>
-            <span class="meta-tag">portable</span>
           </div>
         </div>
         <div class="file-card-docs">
@@ -1341,19 +1445,17 @@ ln -s CLAUDE.md AGENTS.md</pre>
           <a href="https://docs.anthropic.com/en/docs/claude-code/skills" target="_blank" rel="noopener" class="doc-link">Claude Code Skills ↗</a>
           <a href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/create-skills" target="_blank" rel="noopener" class="doc-link">Copilot Agent Skills ↗</a>
           <a href="https://github.com/anthropics/skills" target="_blank" rel="noopener" class="doc-link">anthropics/skills ↗</a>
-          <a href="https://code.visualstudio.com/docs/copilot/customization/agent-skills" target="_blank" rel="noopener" class="doc-link">VS Code Skills ↗</a>
         </div>
         <div class="file-card-snippet">
           <div class="snippet-label">Structure: .github/skills/api-tests/SKILL.md</div>
           <pre><span class="comment">---</span>
 <span class="key">name</span>: <span class="val">api-tests</span>
 <span class="key">description</span>: <span class="val">Write and run API integration tests.
-  Use when asked to create or fix API tests.</span>
+Use when asked to create or fix API tests.</span>
 <span class="comment">---</span>
 
-<span class="comment"># Step-by-step instructions go here.
-# Include helper scripts and examples
-# in the same folder alongside SKILL.md.</span></pre>
+<span class="comment"># Step-by-step instructions here.
+# Include helper scripts in same folder.</span></pre>
         </div>
       </div>
 
@@ -1367,7 +1469,7 @@ ln -s CLAUDE.md AGENTS.md</pre>
           <div class="owner-dot" style="background:#cc785c"></div>
         </div>
         <div class="file-card-body">
-          <p class="file-card-desc">Custom subagents for Claude Code with isolated context. Defined via YAML frontmatter. Project agents (.claude/agents/) are version-controlled and team-shared. User agents (~/.claude/agents/) are personal and available in all projects.</p>
+          <p class="file-card-desc">Custom subagents for Claude Code with isolated context windows. Defined via YAML frontmatter. Project agents are version-controlled; user agents (~/.claude/agents/) apply across all projects.</p>
           <div class="file-card-meta">
             <span class="meta-tag">claude code</span>
             <span class="meta-tag">subagents</span>
@@ -1377,7 +1479,6 @@ ln -s CLAUDE.md AGENTS.md</pre>
         <div class="file-card-docs">
           <span class="docs-label">Docs</span>
           <a href="https://docs.anthropic.com/en/docs/claude-code/sub-agents" target="_blank" rel="noopener" class="doc-link">Subagents Docs ↗</a>
-          <a href="https://github.com/anthropics/claude-code" target="_blank" rel="noopener" class="doc-link">GitHub ↗</a>
         </div>
         <div class="file-card-snippet">
           <div class="snippet-label">Example: .claude/agents/reviewer.md</div>
@@ -1390,7 +1491,7 @@ ln -s CLAUDE.md AGENTS.md</pre>
 
 <span class="val">You are a principal-level code reviewer.
 Focus on bugs, security, and performance.
-Be specific — cite file and line number.</span></pre>
+Cite file and line number for every issue.</span></pre>
         </div>
       </div>
 
@@ -1404,7 +1505,7 @@ Be specific — cite file and line number.</span></pre>
           <div class="owner-dot" style="background:#8b5cf6"></div>
         </div>
         <div class="file-card-body">
-          <p class="file-card-desc">Cursor's rule system with four loading modes: Always (every context), Auto Attached (glob-matched files), Agent Requested (AI decides), Manual (explicit only). More granular than AGENTS.md for Cursor power users.</p>
+          <p class="file-card-desc">Cursor's rule system with four loading modes: Always, Auto Attached (glob-matched), Agent Requested (AI decides), Manual (explicit only). More granular than AGENTS.md for Cursor power users.</p>
           <div class="file-card-meta">
             <span class="meta-tag">cursor</span>
             <span class="meta-tag">conditional loading</span>
@@ -1428,7 +1529,7 @@ Hash key must be named `pk`, range `sk`.</span></pre>
         </div>
       </div>
 
-      <!-- .github/agents/.agent.md -->
+      <!-- .github/agents/*.agent.md -->
       <div class="file-card">
         <div class="file-card-header">
           <div>
@@ -1438,11 +1539,10 @@ Hash key must be named `pk`, range `sk`.</span></pre>
           <div class="owner-dot" style="background:#2d7dd2"></div>
         </div>
         <div class="file-card-body">
-          <p class="file-card-desc">GitHub Copilot's custom agent format, GA as of April 2026. Defines specialized personas with their own tool restrictions, model preferences, and handoffs between agents. Replaces the deprecated <code>.chatmode.md</code> format. Project agents live in <code>.github/agents/</code> and are team-shared; personal agents go in <code>~/.copilot/agents/</code>. Directly parallels Claude Code's <code>.claude/agents/*.md</code>.</p>
+          <p class="file-card-desc">GitHub Copilot's custom agent format, GA April 2026. Defines specialized personas with tool restrictions, model preferences, and handoffs. Replaces the deprecated <code>.chatmode.md</code> format. Mirrors Claude Code's <code>.claude/agents/*.md</code> pattern.</p>
           <div class="file-card-meta">
             <span class="meta-tag">github copilot</span>
             <span class="meta-tag">custom agents</span>
-            <span class="meta-tag">frontmatter</span>
             <span class="meta-tag">replaces .chatmode.md</span>
           </div>
         </div>
@@ -1464,8 +1564,7 @@ Hash key must be named `pk`, range `sk`.</span></pre>
 <span class="comment">---</span>
 
 <span class="val">You are a Senior Security Engineer.
-Always check /src/auth first.
-Provide a remediation plan for every bug.</span></pre>
+Always check /src/auth first.</span></pre>
         </div>
       </div>
 
@@ -1475,18 +1574,503 @@ Provide a remediation plan for every bug.</span></pre>
 
 <hr class="divider" />
 
+<!-- TOOL LANDSCAPE -->
+<section id="tools">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">// 03 — Tool Landscape</div>
+      <h2>Tool Landscape</h2>
+      <p class="section-desc">What exists, what category it's in, and how the pieces fit together. Not exhaustive — focused on tools with meaningful instruction file or orchestration support.</p>
+    </div>
+
+    <!-- Category Cards -->
+    <div class="tool-category-grid">
+
+      <!-- CLI Agents -->
+      <div class="tool-category-card">
+        <div class="tool-category-header">
+          <div class="tool-category-icon">⌨️</div>
+          <div>
+            <div class="tool-category-name">CLI Agents</div>
+            <div class="tool-category-label">Terminal-first, local execution</div>
+          </div>
+        </div>
+        <div class="tool-category-body">
+          <div class="tool-entry">
+            <div class="tool-color-dot" style="background:#cc785c"></div>
+            <div>
+              <div class="tool-entry-name">Claude Code</div>
+              <div class="tool-entry-desc">Anthropic's terminal agent. 1M token context, sub-agents, agent teams, git worktrees. Strongest long-session autonomy.</div>
+              <div class="tool-entry-files">
+                <span class="tool-file-tag">CLAUDE.md</span>
+                <span class="tool-file-tag">.claude/agents/</span>
+                <span class="tool-file-tag">SKILL.md</span>
+              </div>
+            </div>
+          </div>
+          <div class="tool-entry">
+            <div class="tool-color-dot" style="background:#10a37f"></div>
+            <div>
+              <div class="tool-entry-name">OpenAI Codex</div>
+              <div class="tool-entry-desc">Cloud-first with local CLI. Up to 6 parallel sub-agents, cloud sandboxes, CSV batch dispatch, built-in worktrees.</div>
+              <div class="tool-entry-files">
+                <span class="tool-file-tag">AGENTS.md</span>
+                <span class="tool-file-tag">setup.sh</span>
+              </div>
+            </div>
+          </div>
+          <div class="tool-entry">
+            <div class="tool-color-dot" style="background:#4285f4"></div>
+            <div>
+              <div class="tool-entry-name">Gemini CLI</div>
+              <div class="tool-entry-desc">Google's open-source terminal agent. 1M token context, free tier (1,000 req/day), sub-agents added April 2026.</div>
+              <div class="tool-entry-files">
+                <span class="tool-file-tag">GEMINI.md</span>
+                <span class="tool-file-tag">AGENTS.md</span>
+              </div>
+            </div>
+          </div>
+          <div class="tool-entry">
+            <div class="tool-color-dot" style="background:#aaaacc"></div>
+            <div>
+              <div class="tool-entry-name">OpenCode</div>
+              <div class="tool-entry-desc">Open source, 75+ LLM providers, dual plan/act agents, 147K GitHub stars. Official Copilot partnership Jan 2026.</div>
+              <div class="tool-entry-files">
+                <span class="tool-file-tag">AGENTS.md</span>
+              </div>
+            </div>
+          </div>
+          <div class="tool-entry">
+            <div class="tool-color-dot" style="background:#22c55e"></div>
+            <div>
+              <div class="tool-entry-name">Cline</div>
+              <div class="tool-entry-desc">VS Code extension, 5M installs. Dual Plan/Act modes with explicit file-change approval. Cline CLI 2.0 adds parallel terminal agents. Samsung rolling out org-wide.</div>
+              <div class="tool-entry-files">
+                <span class="tool-file-tag">AGENTS.md</span>
+                <span class="tool-file-tag">.clinerules</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- AI-Native IDEs -->
+      <div class="tool-category-card">
+        <div class="tool-category-header">
+          <div class="tool-category-icon">🖥️</div>
+          <div>
+            <div class="tool-category-name">AI-Native IDEs</div>
+            <div class="tool-category-label">Editor-first, inline AI</div>
+          </div>
+        </div>
+        <div class="tool-category-body">
+          <div class="tool-entry">
+            <div class="tool-color-dot" style="background:#8b5cf6"></div>
+            <div>
+              <div class="tool-entry-name">Cursor</div>
+              <div class="tool-entry-desc">VS Code fork. Up to 8 parallel agents via Mission Control. Background cloud agents. $2B ARR Feb 2026.</div>
+              <div class="tool-entry-files">
+                <span class="tool-file-tag">AGENTS.md</span>
+                <span class="tool-file-tag">.cursor/rules/</span>
+              </div>
+            </div>
+          </div>
+          <div class="tool-entry">
+            <div class="tool-color-dot" style="background:#06b6d4"></div>
+            <div>
+              <div class="tool-entry-name">Windsurf</div>
+              <div class="tool-entry-desc">Codeium/Google. Up to 5 parallel agents (Wave 13, Mar 2026). Arena Mode, SWE-1.5 model. SKILL.md support.</div>
+              <div class="tool-entry-files">
+                <span class="tool-file-tag">AGENTS.md</span>
+                <span class="tool-file-tag">SKILL.md</span>
+              </div>
+            </div>
+          </div>
+          <div class="tool-entry">
+            <div class="tool-color-dot" style="background:#238636"></div>
+            <div>
+              <div class="tool-entry-name">VS Code + Copilot</div>
+              <div class="tool-entry-desc">GitHub Copilot in VS Code with full agent mode, /fleet parallel dispatch, custom agents, and cloud coding agent.</div>
+              <div class="tool-entry-files">
+                <span class="tool-file-tag">AGENTS.md</span>
+                <span class="tool-file-tag">*.agent.md</span>
+                <span class="tool-file-tag">SKILL.md</span>
+              </div>
+            </div>
+          </div>
+          <div class="tool-entry">
+            <div class="tool-color-dot" style="background:#f59e0b"></div>
+            <div>
+              <div class="tool-entry-name">Zed</div>
+              <div class="tool-entry-desc">High-performance Rust editor. Native AGENTS.md support. Fast and lightweight — popular among developers who want AI without IDE overhead.</div>
+              <div class="tool-entry-files">
+                <span class="tool-file-tag">AGENTS.md</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cloud / Async Agents -->
+      <div class="tool-category-card">
+        <div class="tool-category-header">
+          <div class="tool-category-icon">☁️</div>
+          <div>
+            <div class="tool-category-name">Cloud / Async Agents</div>
+            <div class="tool-category-label">Background execution, PR delivery</div>
+          </div>
+        </div>
+        <div class="tool-category-body">
+          <div class="tool-entry">
+            <div class="tool-color-dot" style="background:#238636"></div>
+            <div>
+              <div class="tool-entry-name">Copilot Cloud Agent</div>
+              <div class="tool-entry-desc">Assign a GitHub issue → get a PR. Runs on GitHub Actions. Mission Control manages multiple parallel sessions across repos.</div>
+              <div class="tool-entry-files">
+                <span class="tool-file-tag">AGENTS.md</span>
+                <span class="tool-file-tag">copilot-instructions.md</span>
+              </div>
+            </div>
+          </div>
+          <div class="tool-entry">
+            <div class="tool-color-dot" style="background:#10a37f"></div>
+            <div>
+              <div class="tool-entry-name">Codex Automations</div>
+              <div class="tool-entry-desc">Scheduled or event-triggered tasks — issue triage, CI monitoring, routine refactors — running without prompting.</div>
+              <div class="tool-entry-files">
+                <span class="tool-file-tag">AGENTS.md</span>
+              </div>
+            </div>
+          </div>
+          <div class="tool-entry">
+            <div class="tool-color-dot" style="background:#8b5cf6"></div>
+            <div>
+              <div class="tool-entry-name">Cursor Background Agents</div>
+              <div class="tool-entry-desc">Agents run in isolated VMs, accessible from web, mobile, and Slack. Auto-create PRs with artifacts.</div>
+              <div class="tool-entry-files">
+                <span class="tool-file-tag">AGENTS.md</span>
+                <span class="tool-file-tag">.cursor/rules/</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Orchestration Layers -->
+      <div class="tool-category-card">
+        <div class="tool-category-header">
+          <div class="tool-category-icon">🔀</div>
+          <div>
+            <div class="tool-category-name">Orchestration Layers</div>
+            <div class="tool-category-label">Coordinate multiple agents</div>
+          </div>
+        </div>
+        <div class="tool-category-body">
+          <div class="tool-entry">
+            <div class="tool-color-dot" style="background:#238636"></div>
+            <div>
+              <div class="tool-entry-name">Squad</div>
+              <div class="tool-entry-desc">Open-source team framework on Copilot. Named specialist agents with persistent repo memory. See Projects section.</div>
+              <div class="tool-entry-files">
+                <span class="tool-file-tag">*.agent.md</span>
+                <span class="tool-file-tag">.squad/</span>
+              </div>
+            </div>
+          </div>
+          <div class="tool-entry">
+            <div class="tool-color-dot" style="background:#aaaacc"></div>
+            <div>
+              <div class="tool-entry-name">SuperSet</div>
+              <div class="tool-entry-desc">Desktop orchestration layer. Run 10+ CLI agents in parallel across git worktrees. Supports Claude Code, Codex, Gemini CLI, Copilot, Cursor Agent, and more.</div>
+              <div class="tool-entry-files">
+                <span class="tool-file-tag">agent-native</span>
+              </div>
+            </div>
+          </div>
+          <div class="tool-entry">
+            <div class="tool-color-dot" style="background:#ffaa44"></div>
+            <div>
+              <div class="tool-entry-name">APM</div>
+              <div class="tool-entry-desc">Agent Package Manager by Microsoft. Declares skills, agents, and instructions in apm.yml. Compiles to AGENTS.md and CLAUDE.md. See Projects section.</div>
+              <div class="tool-entry-files">
+                <span class="tool-file-tag">apm.yml</span>
+                <span class="tool-file-tag">AGENTS.md</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Parallel Agent Comparison Table -->
+    <div class="subsection-header">
+      <div class="subsection-title">Parallel Sub-Agent Comparison</div>
+      <div class="subsection-desc">Key dimensions for choosing a tool when parallel execution matters.</div>
+    </div>
+
+    <div class="comparison-wrap">
+      <table class="comparison-table">
+        <thead>
+          <tr>
+            <th>Tool</th>
+            <th>Max Agents</th>
+            <th>Invocation</th>
+            <th>File Isolation</th>
+            <th>Async / Background</th>
+            <th>Cross-session Persistence</th>
+            <th>Config File</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <div class="tool-name-cell">Claude Code</div>
+              <span class="tool-type-tag tag-cli">CLI</span>
+            </td>
+            <td>No hard cap<br><span style="color:var(--text-dim);font-size:10px;">5–9 common</span></td>
+            <td class="val-partial">Explicit prompt or CLAUDE.md routing rules</td>
+            <td class="val-yes">Git worktrees + directory ownership</td>
+            <td class="val-yes">Agent Teams for sustained async</td>
+            <td class="val-no">Session-scoped; Agent Teams lose state on close</td>
+            <td><span class="tool-file-tag">CLAUDE.md</span><br><span class="tool-file-tag">.claude/agents/</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="tool-name-cell">OpenAI Codex</div>
+              <span class="tool-type-tag tag-cloud">Cloud + CLI</span>
+            </td>
+            <td>Up to 6<br><span style="color:var(--text-dim);font-size:10px;">per session</span></td>
+            <td class="val-partial">Explicit only — never auto-spawns</td>
+            <td class="val-yes">Worktrees built-in; kernel-level sandbox</td>
+            <td class="val-yes">Automations run unprompted</td>
+            <td class="val-yes">Memory + session history persists</td>
+            <td><span class="tool-file-tag">AGENTS.md</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="tool-name-cell">Copilot /fleet</div>
+              <span class="tool-type-tag tag-cli">CLI</span>
+            </td>
+            <td>Orchestrator-determined</td>
+            <td class="val-partial"><code>/fleet</code> slash command</td>
+            <td class="val-yes">Dependency-aware dispatch; sequential where files overlap</td>
+            <td class="val-partial">Session-bound; cloud agent for true async</td>
+            <td class="val-no">Session-scoped</td>
+            <td><span class="tool-file-tag">AGENTS.md</span><br><span class="tool-file-tag">copilot-instructions.md</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="tool-name-cell">Squad on Copilot</div>
+              <span class="tool-type-tag tag-framework">Framework</span>
+            </td>
+            <td>No cap documented</td>
+            <td class="val-yes">Natural language → coordinator routes</td>
+            <td class="val-yes">File-write guards; agent domain ownership</td>
+            <td class="val-yes">Ralph watch mode polls and dispatches</td>
+            <td class="val-yes">Committed to git; compounds across sessions</td>
+            <td><span class="tool-file-tag">*.agent.md</span><br><span class="tool-file-tag">.squad/</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="tool-name-cell">Cursor</div>
+              <span class="tool-type-tag tag-ide">IDE</span>
+            </td>
+            <td>Up to 8</td>
+            <td class="val-yes">Mission Control dashboard</td>
+            <td class="val-yes">Per-agent domain ownership</td>
+            <td class="val-yes">Background cloud agents in isolated VMs</td>
+            <td class="val-no">Context lost on session close</td>
+            <td><span class="tool-file-tag">AGENTS.md</span><br><span class="tool-file-tag">.cursor/rules/</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="tool-name-cell">Windsurf</div>
+              <span class="tool-type-tag tag-ide">IDE</span>
+            </td>
+            <td>Up to 5<br><span style="color:var(--text-dim);font-size:10px;">Wave 13</span></td>
+            <td class="val-yes">Plan Mode decomposes before execution</td>
+            <td class="val-yes">Git worktrees per agent</td>
+            <td class="val-partial">Session-bound Cascade; no standalone async</td>
+            <td class="val-partial">Memories feature retains codebase context</td>
+            <td><span class="tool-file-tag">AGENTS.md</span><br><span class="tool-file-tag">SKILL.md</span></td>
+          </tr>
+          <tr>
+            <td>
+              <div class="tool-name-cell">Gemini CLI</div>
+              <span class="tool-type-tag tag-cli">CLI</span>
+            </td>
+            <td>Not documented</td>
+            <td class="val-partial">Explicit delegation via prompt syntax</td>
+            <td class="val-partial">Isolated sessions; details limited</td>
+            <td class="val-no">No documented async mode</td>
+            <td class="val-no">No documented persistence</td>
+            <td><span class="tool-file-tag">GEMINI.md</span><br><span class="tool-file-tag">AGENTS.md</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- ORCHESTRATION PATTERNS -->
+<section id="orchestration">
+  <div class="container">
+    <div class="section-header">
+      <div class="section-tag">// 04 — Orchestration Patterns</div>
+      <h2>Orchestration Patterns</h2>
+      <p class="section-desc">Three patterns cover almost every multi-agent use case. Pick the one that matches your task shape.</p>
+    </div>
+
+    <div class="pattern-grid">
+
+      <!-- Pattern 1: Fire and Forget -->
+      <div class="pattern-card">
+        <div class="pattern-card-header">
+          <div class="pattern-num">01</div>
+          <div>
+            <div class="pattern-title">Fire and Forget</div>
+            <div class="pattern-subtitle">spawn → work independently → return summary</div>
+          </div>
+        </div>
+        <div class="pattern-card-body">
+          <div class="pattern-when">When to use</div>
+          <ul class="pattern-use-cases">
+            <li>Parallel research or codebase exploration</li>
+            <li>Independent analysis tasks (security, quality, performance)</li>
+            <li>Batch operations across multiple files with no shared state</li>
+            <li>Tasks where verbose output would pollute the main context</li>
+          </ul>
+          <div class="pattern-tools-label">Tools</div>
+          <div class="pattern-tools">
+            <span class="pattern-tool-tag">Claude Code sub-agents</span>
+            <span class="pattern-tool-tag">Codex sub-agents</span>
+            <span class="pattern-tool-tag">Gemini CLI sub-agents</span>
+          </div>
+          <div class="pattern-file-row">
+            <div class="pattern-file-label">Key files</div>
+            <div class="pattern-file-chips">
+              <span class="pattern-file-chip">.claude/agents/*.md</span>
+              <span class="pattern-file-chip">AGENTS.md</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pattern 2: Coordinated Team -->
+      <div class="pattern-card">
+        <div class="pattern-card-header">
+          <div class="pattern-num">02</div>
+          <div>
+            <div class="pattern-title">Coordinated Team</div>
+            <div class="pattern-subtitle">shared task list → agents observe each other → merge</div>
+          </div>
+        </div>
+        <div class="pattern-card-body">
+          <div class="pattern-when">When to use</div>
+          <ul class="pattern-use-cases">
+            <li>Multi-file features spanning API, UI, and tests</li>
+            <li>Parallel implementation tracks that must eventually integrate</li>
+            <li>Work requiring specialist roles (frontend, backend, tester, reviewer)</li>
+            <li>Long-running projects where state needs to survive session close</li>
+          </ul>
+          <div class="pattern-tools-label">Tools</div>
+          <div class="pattern-tools">
+            <span class="pattern-tool-tag">Claude Code Agent Teams</span>
+            <span class="pattern-tool-tag">Squad on Copilot</span>
+            <span class="pattern-tool-tag">Cursor Mission Control</span>
+          </div>
+          <div class="pattern-file-row">
+            <div class="pattern-file-label">Key files</div>
+            <div class="pattern-file-chips">
+              <span class="pattern-file-chip">.claude/agents/*.md</span>
+              <span class="pattern-file-chip">*.agent.md</span>
+              <span class="pattern-file-chip">CLAUDE.md</span>
+              <span class="pattern-file-chip">.squad/</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pattern 3: Async Background -->
+      <div class="pattern-card">
+        <div class="pattern-card-header">
+          <div class="pattern-num">03</div>
+          <div>
+            <div class="pattern-title">Async Background</div>
+            <div class="pattern-subtitle">assign task → agent runs independently → delivers PR</div>
+          </div>
+        </div>
+        <div class="pattern-card-body">
+          <div class="pattern-when">When to use</div>
+          <ul class="pattern-use-cases">
+            <li>Well-scoped GitHub issues with clear acceptance criteria</li>
+            <li>Routine work: test coverage, refactors, doc updates, bug fixes</li>
+            <li>Overnight or unattended execution on long tasks</li>
+            <li>Scheduled automations — issue triage, CI monitoring</li>
+          </ul>
+          <div class="pattern-tools-label">Tools</div>
+          <div class="pattern-tools">
+            <span class="pattern-tool-tag">Copilot Cloud Agent</span>
+            <span class="pattern-tool-tag">Codex Automations</span>
+            <span class="pattern-tool-tag">Cursor Background Agents</span>
+            <span class="pattern-tool-tag">Squad + @copilot</span>
+          </div>
+          <div class="pattern-file-row">
+            <div class="pattern-file-label">Key files</div>
+            <div class="pattern-file-chips">
+              <span class="pattern-file-chip">AGENTS.md</span>
+              <span class="pattern-file-chip">copilot-instructions.md</span>
+              <span class="pattern-file-chip">*.agent.md</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Tips inline -->
+    <div class="symlink-box" style="border-left-color: var(--accent2);">
+      <h3 style="color:var(--accent2);">⚡ Orchestration tips that actually matter</h3>
+      <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin-top:1rem;">
+        <div>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--text-muted);font-weight:600;margin-bottom:4px;">Parallel only when files don't overlap</div>
+          <div style="font-size:13px;color:var(--text-muted);">The conflict isn't at runtime — it's at merge. Assign domain ownership explicitly before spawning agents.</div>
+        </div>
+        <div>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--text-muted);font-weight:600;margin-bottom:4px;">Token cost multiplies linearly</div>
+          <div style="font-size:13px;color:var(--text-muted);">5 parallel agents = ~5× token burn. Know your rate limits before running large teams. Use Haiku/Flash for research agents.</div>
+        </div>
+        <div>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--text-muted);font-weight:600;margin-bottom:4px;">Sub-agents can't spawn sub-agents</div>
+          <div style="font-size:13px;color:var(--text-muted);">Most tools default to max_depth=1. The orchestrator spawns workers; workers don't spawn more workers.</div>
+        </div>
+        <div>
+          <div style="font-family:var(--mono);font-size:11px;color:var(--text-muted);font-weight:600;margin-bottom:4px;">Always validate before merging</div>
+          <div style="font-size:13px;color:var(--text-muted);">Parallel output needs a validation step — a dedicated reviewer agent or integration tests — before any merge.</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider" />
+
 <!-- PROJECTS -->
 <section id="projects">
   <div class="container">
     <div class="section-header">
-      <div class="section-tag">// 03 — Notable Projects</div>
+      <div class="section-tag">// 05 — Notable Projects</div>
       <h2>Projects Worth Knowing</h2>
       <p class="section-desc">Tools and collections that extend, distribute, or orchestrate AI agent instruction files. Verified details only — compatibility marked explicitly.</p>
     </div>
 
     <div class="projects-grid">
 
-      <!-- APM -->
       <div class="project-card">
         <div class="project-card-header">
           <div class="project-meta">
@@ -1496,7 +2080,7 @@ Provide a remediation plan for every bug.</span></pre>
           <a href="https://github.com/microsoft/apm" target="_blank" class="project-link">github.com/microsoft/apm ↗</a>
         </div>
         <div class="project-card-body">
-          <p class="project-desc">Think <code>package.json</code> but for AI agent configuration. APM introduces an <code>apm.yml</code> manifest that declares the skills, prompts, instructions, and agents your project needs. Run <code>apm install</code> and every developer gets an identical agent setup. Resolves transitive dependencies, compiles to <code>AGENTS.md</code> and <code>CLAUDE.md</code> automatically, and installs from GitHub, GitHub Enterprise, and Azure DevOps — no registry required.</p>
+          <p class="project-desc">Think <code>package.json</code> but for AI agent configuration. APM introduces an <code>apm.yml</code> manifest that declares the skills, prompts, instructions, and agents your project needs. Run <code>apm install</code> and every developer gets an identical agent setup. Resolves transitive dependencies, compiles to <code>AGENTS.md</code> and <code>CLAUDE.md</code> automatically, and installs from GitHub, GitHub Enterprise, and Azure DevOps.</p>
           <div class="project-compat">
             <div class="compat-label">Tool compatibility</div>
             <div class="compat-tags">
@@ -1515,7 +2099,6 @@ Provide a remediation plan for every bug.</span></pre>
         </div>
       </div>
 
-      <!-- Squad -->
       <div class="project-card">
         <div class="project-card-header">
           <div class="project-meta">
@@ -1525,14 +2108,13 @@ Provide a remediation plan for every bug.</span></pre>
           <a href="https://github.com/bradygaster/squad" target="_blank" class="project-link">github.com/bradygaster/squad ↗</a>
         </div>
         <div class="project-card-body">
-          <p class="project-desc">An AI team framework built on top of GitHub Copilot. You describe what you're building and Squad proposes a named team of specialist agents — each with a defined role, its own memory, and shared decision logs. Agents persist across sessions as files in your repo, learning your codebase over time. Integrates with GitHub Issues via labels: tag an issue <code>squad</code> and the lead agent triages and assigns it automatically. Can include <code>@copilot</code> as a team member for autonomous coding tasks. TypeScript SDK-first mode available via <code>squad.config.ts</code>. Featured on the GitHub Blog (March 2026).</p>
+          <p class="project-desc">An AI team framework built on GitHub Copilot. Describe what you're building and Squad proposes a named team of specialist agents — each with a defined role, its own memory, and shared decision logs committed to git. Agents persist across sessions, learning your codebase over time. Integrates with GitHub Issues via labels. Featured on the GitHub Blog March 2026.</p>
           <div class="project-compat">
             <div class="compat-label">Tool compatibility</div>
             <div class="compat-tags">
               <span class="compat-tag supported">✓ GitHub Copilot</span>
               <span class="compat-tag not-supported">Not supported — Cursor</span>
               <span class="compat-tag not-supported">Not supported — Claude Code</span>
-              <span class="compat-tag not-supported">Not supported — Codex</span>
             </div>
           </div>
           <div class="project-detail-row">
@@ -1542,7 +2124,6 @@ Provide a remediation plan for every bug.</span></pre>
         </div>
       </div>
 
-      <!-- anthropics/skills -->
       <div class="project-card">
         <div class="project-card-header">
           <div class="project-meta">
@@ -1552,7 +2133,7 @@ Provide a remediation plan for every bug.</span></pre>
           <a href="https://github.com/anthropics/skills" target="_blank" class="project-link">github.com/anthropics/skills ↗</a>
         </div>
         <div class="project-card-body">
-          <p class="project-desc">Anthropic's official skill library — the canonical reference for the <code>SKILL.md</code> format. Contains 50+ production-quality skills across document processing (Word, PDF, PowerPoint, Excel), development tools, design, and enterprise workflows. The <code>docx</code>, <code>pdf</code>, <code>pptx</code>, and <code>xlsx</code> skills are the same ones powering Claude's document capabilities in production. Installable as a Claude Code plugin via <code>/plugin install</code>.</p>
+          <p class="project-desc">Anthropic's official skill library — the canonical reference for the <code>SKILL.md</code> format. Contains 50+ production-quality skills across document processing (Word, PDF, PowerPoint, Excel), development tools, design, and enterprise workflows. Installable as a Claude Code plugin via <code>/plugin install</code>.</p>
           <div class="project-compat">
             <div class="compat-label">Tool compatibility</div>
             <div class="compat-tags">
@@ -1563,13 +2144,12 @@ Provide a remediation plan for every bug.</span></pre>
             </div>
           </div>
           <div class="project-detail-row">
-            <span class="detail-pill">License: Apache 2.0 (most skills)</span>
+            <span class="detail-pill">License: Apache 2.0</span>
             <span class="detail-pill">Install: <code>/plugin install document-skills@anthropic-agent-skills</code></span>
           </div>
         </div>
       </div>
 
-      <!-- github/awesome-copilot -->
       <div class="project-card">
         <div class="project-card-header">
           <div class="project-meta">
@@ -1579,14 +2159,13 @@ Provide a remediation plan for every bug.</span></pre>
           <a href="https://github.com/github/awesome-copilot" target="_blank" class="project-link">github.com/github/awesome-copilot ↗</a>
         </div>
         <div class="project-card-body">
-          <p class="project-desc">GitHub's official community-contributed collection of Copilot customizations. Includes instructions files, agent personas, hooks (event-driven automations triggered by Copilot coding agent sessions), agentic workflows for GitHub Actions, plugins, and skills. A practical starting point for teams looking to adopt instruction files — most entries are production-tested and cover a wide range of languages, frameworks, and roles.</p>
+          <p class="project-desc">GitHub's official community-contributed collection of Copilot customizations. Includes instructions files, agent personas, hooks, agentic workflows for GitHub Actions, plugins, and skills. Practical starting point for teams adopting instruction files — most entries are production-tested.</p>
           <div class="project-compat">
             <div class="compat-label">Tool compatibility</div>
             <div class="compat-tags">
               <span class="compat-tag supported">✓ GitHub Copilot</span>
               <span class="compat-tag supported">✓ Claude Code (skills)</span>
               <span class="compat-tag not-supported">Not supported — Codex</span>
-              <span class="compat-tag not-supported">Not supported — Cursor</span>
             </div>
           </div>
           <div class="project-detail-row">
@@ -1596,7 +2175,6 @@ Provide a remediation plan for every bug.</span></pre>
         </div>
       </div>
 
-      <!-- agentsmd/agents.md -->
       <div class="project-card">
         <div class="project-card-header">
           <div class="project-meta">
@@ -1606,7 +2184,7 @@ Provide a remediation plan for every bug.</span></pre>
           <a href="https://github.com/agentsmd/agents.md" target="_blank" class="project-link">github.com/agentsmd/agents.md ↗</a>
         </div>
         <div class="project-card-body">
-          <p class="project-desc">The canonical specification repository for the <code>AGENTS.md</code> open standard. Released by OpenAI in August 2025 and donated to the Linux Foundation / Agentic AI Foundation in December 2025. Includes the formal spec, examples, and a companion site at <a href="https://agents.md" target="_blank">agents.md</a>. This is the authoritative source for how the standard should behave across tools — read this before writing your first <code>AGENTS.md</code>.</p>
+          <p class="project-desc">The canonical specification repository for the <code>AGENTS.md</code> open standard. Released by OpenAI August 2025, donated to the Linux Foundation / Agentic AI Foundation December 2025. The authoritative source for how the standard behaves across tools.</p>
           <div class="project-compat">
             <div class="compat-label">Standard adopted by</div>
             <div class="compat-tags">
@@ -1615,7 +2193,6 @@ Provide a remediation plan for every bug.</span></pre>
               <span class="compat-tag supported">✓ Gemini CLI</span>
               <span class="compat-tag supported">✓ Cursor</span>
               <span class="compat-tag supported">✓ Windsurf</span>
-              <span class="compat-tag supported">✓ Zed</span>
               <span class="compat-tag partial-support">~ Claude Code (via symlink)</span>
             </div>
           </div>
@@ -1626,7 +2203,6 @@ Provide a remediation plan for every bug.</span></pre>
         </div>
       </div>
 
-      <!-- github/copilot-sdk -->
       <div class="project-card">
         <div class="project-card-header">
           <div class="project-meta">
@@ -1636,25 +2212,50 @@ Provide a remediation plan for every bug.</span></pre>
           <a href="https://github.com/github/copilot-sdk" target="_blank" class="project-link">github.com/github/copilot-sdk ↗</a>
         </div>
         <div class="project-card-body">
-          <p class="project-desc">Embeds the same agentic execution loop that powers Copilot CLI directly into your application. Instead of building your own orchestration layer, you define agent behavior — tools, instructions, permissions — and Copilot handles planning, tool invocation, file edits, multi-turn memory, and model routing. Supports BYOK (Bring Your Own Key) so you can substitute OpenAI, Azure AI Foundry, or Anthropic models without a Copilot subscription. Available in Python, TypeScript, Go, and .NET. Launched January 2026; currently in technical preview.</p>
+          <p class="project-desc">Embeds Copilot's full agentic runtime directly into your application. Define agent behavior — tools, instructions, permissions — and Copilot handles planning, tool invocation, file edits, multi-turn memory, and model routing. Supports BYOK for OpenAI, Azure AI Foundry, and Anthropic. Python, TypeScript, Go, and .NET. Launched January 2026.</p>
           <div class="project-compat">
             <div class="compat-label">Tool compatibility</div>
             <div class="compat-tags">
               <span class="compat-tag supported">✓ GitHub Copilot</span>
               <span class="compat-tag supported">✓ BYOK (OpenAI / Azure / Anthropic)</span>
-              <span class="compat-tag not-supported">Not supported — Cursor</span>
-              <span class="compat-tag not-supported">Not supported — Claude Code</span>
             </div>
           </div>
           <div class="project-detail-row">
             <span class="detail-pill">Status: Technical Preview</span>
             <span class="detail-pill">Languages: Python, TypeScript, Go, .NET</span>
-            <span class="detail-pill">Install: <code>pip install copilot-sdk</code> / <code>npm install @github/copilot-sdk</code></span>
           </div>
         </div>
       </div>
 
-      <!-- bouncer-md -->
+      <div class="project-card">
+        <div class="project-card-header">
+          <div class="project-meta">
+            <div class="project-name">SuperSet</div>
+            <div class="project-owner">Former YC CTOs · <a href="https://superset.sh" target="_blank">superset.sh</a></div>
+          </div>
+          <a href="https://github.com/supersetsh/superset" target="_blank" class="project-link">superset.sh ↗</a>
+        </div>
+        <div class="project-card-body">
+          <p class="project-desc">Desktop orchestration layer for running 10+ AI coding agents in parallel across isolated git worktrees. Not an IDE — sits alongside your editor and dispatches agents to it. Supports Claude Code, Codex, Gemini CLI, Copilot, Cursor Agent, OpenCode, and more. Your API keys go directly to Anthropic or OpenAI — no markup, no proxying. 9,000+ GitHub stars since December 2025. Source-available under Elastic License 2.0.</p>
+          <div class="project-compat">
+            <div class="compat-label">Agent compatibility</div>
+            <div class="compat-tags">
+              <span class="compat-tag supported">✓ Claude Code</span>
+              <span class="compat-tag supported">✓ OpenAI Codex</span>
+              <span class="compat-tag supported">✓ Gemini CLI</span>
+              <span class="compat-tag supported">✓ GitHub Copilot</span>
+              <span class="compat-tag supported">✓ Cursor Agent</span>
+              <span class="compat-tag supported">✓ OpenCode</span>
+            </div>
+          </div>
+          <div class="project-detail-row">
+            <span class="detail-pill">License: ELv2 (source-available)</span>
+            <span class="detail-pill">Free tier + Pro $20/seat/mo</span>
+            <span class="detail-pill">macOS + Linux</span>
+          </div>
+        </div>
+      </div>
+
       <div class="project-card">
         <div class="project-card-header">
           <div class="project-meta">
@@ -1664,7 +2265,7 @@ Provide a remediation plan for every bug.</span></pre>
           <a href="https://github.com/bouncer-md/bouncer-md" target="_blank" class="project-link">github.com/bouncer-md/bouncer-md ↗</a>
         </div>
         <div class="project-card-body">
-          <p class="project-desc">A portable, open-source trust policy and guardrail specification for agentic systems. Defines agent behavior boundaries — what actions are permitted, denied, or require human approval — in a single <code>bouncer.md</code> file that any agent runtime can read. Designed to be composable alongside <code>AGENTS.md</code> and <code>CLAUDE.md</code>: instruction files tell agents what to do, bouncer-md defines the guardrails within which they operate. Currently v0.5 with a full repo structure, test suite, and examples. Maintained independently of any tool vendor to preserve community credibility.</p>
+          <p class="project-desc">A portable, open-source trust policy and guardrail specification for agentic systems. Defines permitted, denied, and approval-gated actions in a single <code>bouncer.md</code> file composable alongside existing instruction files. Instruction files tell agents what to do; bouncer-md defines the guardrails within which they operate. Runtime-agnostic by design, maintained independently of any tool vendor.</p>
           <div class="project-compat">
             <div class="compat-label">Compatibility</div>
             <div class="compat-tags">
@@ -1686,7 +2287,6 @@ Provide a remediation plan for every bug.</span></pre>
   </div>
 </section>
 
-
 <hr class="divider" />
 
 <hr class="divider" />
@@ -1695,51 +2295,128 @@ Provide a remediation plan for every bug.</span></pre>
 <section id="tips">
   <div class="container">
     <div class="section-header">
-      <div class="section-tag">// 04 — Best Practices</div>
-      <h2>Tips That Actually Matter</h2>
-      <p class="section-desc">Distilled from real-world usage and analysis of thousands of repos.</p>
+      <div class="section-tag">// 06 — Tips & Pro Tips</div>
+      <h2>Tips & Pro Tips</h2>
+      <p class="section-desc">Basics for everyone. Advanced patterns for teams running real agentic workflows.</p>
     </div>
 
-    <div class="tips-grid">
-      <div class="tip-card">
-        <div class="tip-icon">🪶</div>
-        <div class="tip-title">Keep it short</div>
-        <p class="tip-desc">Every line in your memory file competes with actual work for context window. Target under 300 lines for CLAUDE.md. Under 200 lines before splitting into subdirectory files for AGENTS.md.</p>
+    <div class="tips-two-col">
+
+      <!-- BASICS -->
+      <div>
+        <div class="tips-col-header">
+          <div class="tips-col-title">Basics</div>
+          <span class="tips-col-badge badge-basics">All levels</span>
+        </div>
+
+        <div class="tip-item">
+          <div class="tip-item-title">🪶 Keep it short</div>
+          <div class="tip-item-body">Every line in your memory file competes with actual work for context window. Target under 300 lines for CLAUDE.md, under 200 for AGENTS.md root before splitting into subdirectory files. Agents that run out of context mid-task produce worse output than agents with no instructions at all.</div>
+        </div>
+
+        <div class="tip-item">
+          <div class="tip-item-title">🔗 Point, don't paste</div>
+          <div class="tip-item-body">Reference other files instead of inlining content. Keep task-specific docs in <code>agent_docs/</code> or <code>docs/</code> and list them in your root file. Agents read what's relevant; unused context is wasted tokens. Use the <code>@filename</code> import syntax in CLAUDE.md to pull in other files on demand.</div>
+        </div>
+
+        <div class="tip-item">
+          <div class="tip-item-title">🚫 Never use for code style</div>
+          <div class="tip-item-body">Don't put linting rules or formatting preferences in instruction files. Use ESLint, Prettier, Black, or your formatter. LLMs are slow and expensive compared to deterministic tools. Reserve instructions for what only a human can explain — architecture decisions, domain context, non-obvious constraints.</div>
+        </div>
+
+        <div class="tip-item">
+          <div class="tip-item-title">⚡ Commands, not descriptions</div>
+          <div class="tip-item-body">Write the exact command (<code>pnpm test --run --no-color</code>), not a description of what it does. Include flags. Agents use these literally — vague wording causes hallucinated flags or wrong tool invocations.</div>
+        </div>
+
+        <div class="tip-item">
+          <div class="tip-item-title">📁 Use hierarchy for monorepos</div>
+          <div class="tip-item-body">Place additional AGENTS.md files in subdirectories. The nearest file in the directory tree wins. OpenAI's own repo uses 88 AGENTS.md files. Don't try to cover everything from the root — put frontend rules near frontend code, backend rules near backend code.</div>
+        </div>
+
+        <div class="tip-item">
+          <div class="tip-item-title">🔄 Treat it like code</div>
+          <div class="tip-item-body">Update instruction files in the same PR as the process change. Review them in code review. Audit quarterly. Outdated instructions actively hurt agent performance — worse than no instructions at all.</div>
+        </div>
+
+        <div class="tip-item">
+          <div class="tip-item-title">🧱 Set clear boundaries</div>
+          <div class="tip-item-body">Tell agents what NOT to do as explicitly as what to do. Include a "never do" section. Tell agents when to ask for human review rather than proceeding. Agents that know their limits are more reliable than agents with open-ended permission.</div>
+        </div>
+
+        <div class="tip-item">
+          <div class="tip-item-title">🔑 Never commit secrets</div>
+          <div class="tip-item-body">These files go into your system prompt and are version-controlled. Never include API keys, passwords, connection strings, or security vulnerability details. Treat the file as public documentation — because it effectively is.</div>
+        </div>
       </div>
-      <div class="tip-card">
-        <div class="tip-icon">🔗</div>
-        <div class="tip-title">Point, don't paste</div>
-        <p class="tip-desc">Reference other files instead of inlining content. Keep task-specific docs in <code>agent_docs/</code> and list them in your root file. Agents read what's relevant; unused context is wasted tokens.</p>
-      </div>
-      <div class="tip-card">
-        <div class="tip-icon">🚫</div>
-        <div class="tip-title">Never use for code style</div>
-        <p class="tip-desc">Don't put linting rules or formatting preferences in instruction files. Use ESLint, Prettier, or your formatter. LLMs are slow and expensive compared to deterministic tools. Reserve instructions for what only a human can explain.</p>
-      </div>
-      <div class="tip-card">
-        <div class="tip-icon">⚡</div>
-        <div class="tip-title">Commands, not descriptions</div>
-        <p class="tip-desc">Write the exact command (<code>pnpm test --run --no-color</code>), not a description of what it does. Include flags. Agents use these literally — vague wording causes hallucinated flags.</p>
-      </div>
-      <div class="tip-card">
-        <div class="tip-icon">📁</div>
-        <div class="tip-title">Use hierarchy for monorepos</div>
-        <p class="tip-desc">Place additional AGENTS.md files in subdirectories. The nearest file in the directory tree wins. OpenAI's own repo uses 88 AGENTS.md files. Don't try to cover everything from the root.</p>
-      </div>
-      <div class="tip-card">
-        <div class="tip-icon">🔄</div>
-        <div class="tip-title">Treat it like code</div>
-        <p class="tip-desc">Update instruction files in the same PR as the process change. Review them in code review. Audit quarterly. Outdated instructions actively hurt agent performance — worse than no instructions at all.</p>
-      </div>
-      <div class="tip-card">
-        <div class="tip-icon">🧱</div>
-        <div class="tip-title">Set clear boundaries</div>
-        <p class="tip-desc">Tell agents what NOT to do as explicitly as what to do. Include a "never do" section. Tell agents when to ask for human review rather than proceeding. Agents that know their limits are more reliable.</p>
-      </div>
-      <div class="tip-card">
-        <div class="tip-icon">🔑</div>
-        <div class="tip-title">Never commit secrets</div>
-        <p class="tip-desc">These files go into your system prompt and are version-controlled. Never include API keys, passwords, connection strings, or security vulnerability details. Treat the file as public documentation.</p>
+
+      <!-- PRO TIPS -->
+      <div>
+        <div class="tips-col-header">
+          <div class="tips-col-title">Pro Tips</div>
+          <span class="tips-col-badge badge-pro">Advanced</span>
+        </div>
+
+        <div class="tip-item">
+          <div class="tip-item-title">⚙️ Use CLAUDE.md routing rules to force parallelism</div>
+          <div class="tip-item-body">Claude Code is conservative about spawning sub-agents by default. Add explicit routing rules to CLAUDE.md to change that behavior — specify which task types should always parallelize, which must be sequential, and which should run in background.</div>
+          <div class="tip-pro-callout">## Sub-Agent Routing Rules
+**Parallel dispatch** (ALL must be true):
+- 3+ unrelated tasks or independent domains
+- No shared state between tasks
+- Clear file boundaries, no overlap
+
+**Sequential dispatch** (ANY triggers):
+- Tasks have dependencies (B needs output from A)
+- Shared files or state (merge conflict risk)
+- Unclear scope — understand before proceeding</div>
+        </div>
+
+        <div class="tip-item">
+          <div class="tip-item-title">🌲 Git worktrees for multi-agent safety</div>
+          <div class="tip-item-body">When running multiple CLI agents (Claude Code, Codex, Gemini CLI) on the same repo, use git worktrees to give each agent a physically isolated codebase on disk. Conflicts surface at merge time with full context — not as a live race condition that corrupts shared state mid-write.</div>
+          <div class="tip-pro-callout"># Each agent gets its own worktree
+git worktree add ../feature-auth -b agent/auth
+git worktree add ../feature-api -b agent/api
+
+# Agents write to different disk paths — zero runtime conflict
+# Coordinator merges branches sequentially when done</div>
+        </div>
+
+        <div class="tip-item">
+          <div class="tip-item-title">🎯 Tight synthesis prompts beat good sub-agents</div>
+          <div class="tip-item-body">The orchestrator's synthesis prompt matters more than the sub-agent definitions themselves. A sloppy "combine these findings" wastes the entire fan-out. A tight synthesis prompt turns fragmented parallel results into a single decision-ready brief. Four lines is enough — be specific about format, priority, and what to discard.</div>
+          <div class="tip-pro-callout">You received findings from [N] parallel agents.
+Synthesize into: 1) top 3 actionable findings ranked by impact,
+2) conflicts or contradictions between agents, 3) one recommended
+next action. Discard redundant detail. Max 300 words.</div>
+        </div>
+
+        <div class="tip-item">
+          <div class="tip-item-title">💰 Route by model, not just by task</div>
+          <div class="tip-item-body">Research and exploration agents don't need your most capable model. Use Haiku or Flash for read-only sub-agents doing codebase exploration, analysis, or documentation. Reserve Sonnet/Opus/GPT-5 for agents that write or modify code. In Claude Code, set <code>model: claude-haiku-4-5</code> in your sub-agent frontmatter. Can cut parallel session costs by 60–80%.</div>
+        </div>
+
+        <div class="tip-item">
+          <div class="tip-item-title">📋 GitHub Issues as agent working memory</div>
+          <div class="tip-item-body">Structure issues specifically for agent consumption: acceptance criteria as a checklist, explicit file scope, test commands to run, definition of done. Agents assigned well-structured issues produce PRs that pass review on the first attempt significantly more often than those assigned vague issues. Treat issue writing as prompt engineering.</div>
+        </div>
+
+        <div class="tip-item">
+          <div class="tip-item-title">🔍 Audit agent conversations before context compaction</div>
+          <div class="tip-item-body">For long-running Claude Code sessions, run a conversation audit before compaction kicks in. Use a lightweight model to scan the conversation log for decisions, constraints, and context the agent has accumulated — extract the important parts back into CLAUDE.md or a working notes file. Prevents losing hard-won session context at the worst moment.</div>
+        </div>
+
+        <div class="tip-item">
+          <div class="tip-item-title">🛡️ Validate parallel output before merging — always</div>
+          <div class="tip-item-body">Never auto-merge parallel agent output. Designate a validator agent (read-only, review-focused) or run your integration test suite as the merge gate. Agents working in parallel can produce individually correct but mutually incompatible changes. The validation step is where the cost of parallelism pays for itself.</div>
+        </div>
+
+        <div class="tip-item">
+          <div class="tip-item-title">📦 Use APM or symlinks for multi-tool repos</div>
+          <div class="tip-item-body">If your team uses more than one tool, don't maintain separate instruction files manually. Either use APM to compile from a single manifest, or use symlinks to keep one authoritative file and link tool-specific names to it. Diverged instruction files across tools are worse than no files — they give different agents contradictory context about the same repo.</div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -1751,18 +2428,26 @@ Provide a remediation plan for every bug.</span></pre>
 <section id="changelog">
   <div class="container">
     <div class="section-header">
-      <div class="section-tag">// 05 — Changelog</div>
+      <div class="section-tag">// 07 — Changelog</div>
       <h2>What's Changed</h2>
       <p class="section-desc">Major changes to the ecosystem. This space moves fast — bookmark and check back.</p>
     </div>
 
     <div class="changelog-list">
       <div class="changelog-item">
+        <div class="change-date">Apr 25, 2026</div>
+        <div><span class="change-type type-update">Update</span></div>
+        <div class="change-content">
+          <strong>Cheatsheet expanded to full agent developer reference</strong>
+          <span>Added Tool Landscape section (category cards + parallel agent comparison table), Orchestration Patterns section (3 patterns with tool mapping and config file references), new changelog entry types (tool, pattern), and updated hero + nav to reflect broader scope.</span>
+        </div>
+      </div>
+      <div class="changelog-item">
         <div class="change-date">Apr 16, 2026</div>
         <div><span class="change-type type-new">New</span></div>
         <div class="change-content">
           <strong>GitHub CLI adds <code>gh skill</code> command for SKILL.md management</strong>
-          <span>A new <code>gh skill</code> command brings package-manager-style tooling to agent skills: install, search, preview, publish, and version-pin to a tag or commit SHA. Skills auto-install to the correct directory per agent host. Supply-chain security features built in — use <code>--agent</code> and <code>--scope</code> flags to target Claude Code, Copilot, or others directly.</span>
+          <span>Package-manager-style tooling for agent skills: install, search, preview, publish, and version-pin. Supply-chain security built in. Use <code>--agent</code> and <code>--scope</code> flags to target Claude Code, Copilot, or others directly.</span>
           <a href="https://github.blog/changelog/2026-04-16-manage-agent-skills-with-github-cli/" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">Changelog ↗</a>
         </div>
       </div>
@@ -1770,10 +2455,19 @@ Provide a remediation plan for every bug.</span></pre>
         <div class="change-date">Apr 1, 2026</div>
         <div><span class="change-type type-new">New</span></div>
         <div class="change-content">
+          <strong>GitHub Copilot <code>/fleet</code> — parallel sub-agents in Copilot CLI</strong>
+          <span>A new slash command enabling orchestrated parallel sub-agent dispatch. Orchestrator decomposes tasks, identifies independent tracks, runs them simultaneously, polls for completion, then dispatches the next wave. Supports per-track model selection and custom agent assignment.</span>
+          <a href="https://github.blog/ai-and-ml/github-copilot/run-multiple-agents-at-once-with-fleet-in-copilot-cli/" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">Blog Post ↗</a>
+          <a href="https://docs.github.com/en/copilot/concepts/agents/copilot-cli/fleet" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">Docs ↗</a>
+        </div>
+      </div>
+      <div class="changelog-item">
+        <div class="change-date">Apr 1, 2026</div>
+        <div><span class="change-type type-new">New</span></div>
+        <div class="change-content">
           <strong>GitHub Copilot <code>.agent.md</code> goes first-class; <code>.chatmode.md</code> deprecated</strong>
-          <span>Custom agents defined as <code>.agent.md</code> files in <code>.github/agents/</code> are now GA across VS Code, Visual Studio, and JetBrains. YAML frontmatter defines name, description, tools, model, and handoffs between agents. The previous <code>.chatmode.md</code> format is deprecated — rename existing files to <code>.agent.md</code> to continue using them. Directly mirrors Claude Code's <code>.claude/agents/*.md</code> pattern.</span>
+          <span>Custom agents defined as <code>.agent.md</code> files in <code>.github/agents/</code> are now GA across VS Code, Visual Studio, and JetBrains. Replaces deprecated <code>.chatmode.md</code> format.</span>
           <a href="https://code.visualstudio.com/docs/copilot/customization/custom-agents" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">VS Code Docs ↗</a>
-          <a href="https://github.blog/changelog/month/04-2026/" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">GitHub Changelog ↗</a>
         </div>
       </div>
       <div class="changelog-item">
@@ -1781,9 +2475,27 @@ Provide a remediation plan for every bug.</span></pre>
         <div><span class="change-type type-new">New</span></div>
         <div class="change-content">
           <strong>Microsoft Agent Framework 1.0 GA</strong>
-          <span>The unified successor to Semantic Kernel and AutoGen ships production-ready for .NET and Python, with stable APIs and a long-term support commitment. Includes native SKILL.md support via <code>FileAgentSkillsProvider</code> — same progressive disclosure pattern as Claude Code and Copilot. AGENTS.md read natively for project instructions. Semantic Kernel and AutoGen enter maintenance mode.</span>
+          <span>Unified successor to Semantic Kernel and AutoGen. Native SKILL.md support via <code>FileAgentSkillsProvider</code>. AGENTS.md read natively. Semantic Kernel and AutoGen enter maintenance mode.</span>
           <a href="https://devblogs.microsoft.com/agent-framework/microsoft-agent-framework-version-1-0/" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">Announcement ↗</a>
-          <a href="https://github.com/microsoft/agent-framework" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">GitHub ↗</a>
+        </div>
+      </div>
+      <div class="changelog-item">
+        <div class="change-date">Mar 19, 2026</div>
+        <div><span class="change-type type-tool">Tool</span></div>
+        <div class="change-content">
+          <strong>Squad launches — repository-native multi-agent teams on Copilot</strong>
+          <span>Open-source framework by Brady Gaster (Microsoft CoreAI). Specialist agents with persistent memory committed to git. Featured on GitHub Blog. 1K GitHub stars in the first week.</span>
+          <a href="https://github.blog/ai-and-ml/github-copilot/how-squad-runs-coordinated-ai-agents-inside-your-repository/" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">Blog Post ↗</a>
+          <a href="https://github.com/bradygaster/squad" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">GitHub ↗</a>
+        </div>
+      </div>
+      <div class="changelog-item">
+        <div class="change-date">Mar 16, 2026</div>
+        <div><span class="change-type type-tool">Tool</span></div>
+        <div class="change-content">
+          <strong>Codex sub-agents GA — explorer / worker / default roles</strong>
+          <span>OpenAI released Codex sub-agents on March 16, 2026. Up to 6 agents concurrently. Three built-in roles: explorer (read-only), worker (read-write), default. The explorer/worker/orchestrator pattern is now the de facto standard across major tools.</span>
+          <a href="https://developers.openai.com/codex/subagents" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">Docs ↗</a>
         </div>
       </div>
       <div class="changelog-item">
@@ -1791,8 +2503,17 @@ Provide a remediation plan for every bug.</span></pre>
         <div><span class="change-type type-new">New</span></div>
         <div class="change-content">
           <strong>Copilot for JetBrains adds AGENTS.md and CLAUDE.md support</strong>
-          <span>The March JetBrains update adds native support for AGENTS.md and CLAUDE.md instruction files, including nested file discovery and auto-generation of an initial AGENTS.md. A <code>/memory</code> slash command provides quick access to manage instruction files. Copilot auto-discovers and loads instruction files into context during agent workflows.</span>
+          <span>Native instruction file discovery, nested file loading, auto-generation of initial AGENTS.md, and a <code>/memory</code> slash command for managing instruction files.</span>
           <a href="https://github.blog/changelog/2026-03-11-major-agentic-capabilities-improvements-in-github-copilot-for-jetbrains-ides/" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">Changelog ↗</a>
+        </div>
+      </div>
+      <div class="changelog-item">
+        <div class="change-date">Mar 9, 2026</div>
+        <div><span class="change-type type-tool">Tool</span></div>
+        <div class="change-content">
+          <strong>Windsurf Wave 13 — up to 5 parallel agents across git worktrees</strong>
+          <span>First commercial IDE with simultaneous multi-agent execution in isolated git worktrees. Also: Arena Mode (blind head-to-head model comparison), Plan Mode, SKILL.md support in <code>.windsurf/skills/</code>.</span>
+          <a href="https://windsurf.com/changelog" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">Changelog ↗</a>
         </div>
       </div>
       <div class="changelog-item">
@@ -1800,7 +2521,7 @@ Provide a remediation plan for every bug.</span></pre>
         <div><span class="change-type type-new">New</span></div>
         <div class="change-content">
           <strong>bouncer-md v0.5 launches</strong>
-          <span>A portable, open-source trust policy and guardrail specification for agentic systems. Defines permitted, denied, and approval-gated actions in a single <code>bouncer.md</code> file composable alongside existing instruction files. Runtime-agnostic by design, maintained independently of any tool vendor. Ships with a full repo structure, test suite, and examples.</span>
+          <span>Portable, open-source trust policy and guardrail spec for agentic systems. Runtime-agnostic. Ships with full repo structure, test suite, and examples.</span>
           <a href="https://github.com/bouncer-md/bouncer-md" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">GitHub ↗</a>
           <a href="https://bouncer-md.github.io" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">Docs ↗</a>
         </div>
@@ -1810,18 +2531,8 @@ Provide a remediation plan for every bug.</span></pre>
         <div><span class="change-type type-new">New</span></div>
         <div class="change-content">
           <strong>Next.js 16.2 auto-generates AGENTS.md and CLAUDE.md</strong>
-          <span><code>create-next-app</code> now scaffolds both files by default. AGENTS.md directs agents to version-matched docs bundled inside <code>node_modules/next/dist/docs/</code> — no stale training data. CLAUDE.md uses the <code>@</code> import syntax to reference AGENTS.md without duplication. Vercel reports 100% pass rate on internal evals with this context in place.</span>
+          <span><code>create-next-app</code> now scaffolds both files by default. AGENTS.md directs agents to version-matched docs in <code>node_modules/next/dist/docs/</code>. CLAUDE.md uses <code>@</code> import syntax to reference AGENTS.md.</span>
           <a href="https://nextjs.org/blog/next-16-2-ai" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">Blog Post ↗</a>
-          <a href="https://nextjs.org/docs/app/guides/ai-agents" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">Docs ↗</a>
-        </div>
-      </div>
-      <div class="changelog-item">
-        <div class="change-date">Mar 9, 2026</div>
-        <div><span class="change-type type-new">New</span></div>
-        <div class="change-content">
-          <strong>Windsurf adds SKILL.md support</strong>
-          <span>Windsurf's March 9 release adds loading of SKILL.md files from <code>.windsurf/skills/</code>, expanding the compatibility matrix. Also adds system-level skill definitions via MDM-managed configs for Enterprise deployments.</span>
-          <a href="https://windsurf.com/changelog" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">Changelog ↗</a>
         </div>
       </div>
       <div class="changelog-item">
@@ -1829,9 +2540,8 @@ Provide a remediation plan for every bug.</span></pre>
         <div><span class="change-type type-standard">Research</span></div>
         <div class="change-content">
           <strong>ETH Zurich study questions AGENTS.md effectiveness</strong>
-          <span>Researchers tested four coding agents across 138 real-world tasks. LLM-generated context files reduced task success rates and raised inference costs ~20%. Human-written files yielded a marginal +4% improvement but also increased costs ~19%. Recommendation: keep files minimal, human-written, and focused on non-inferable details only.</span>
+          <span>Tested four coding agents across 138 tasks. LLM-generated context files reduced success rates and raised costs ~20%. Human-written files yielded +4% but also raised costs ~19%. Recommendation: minimal, human-written, focused on non-inferable details only.</span>
           <a href="https://arxiv.org/abs/2602.11988" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">Paper ↗</a>
-          <a href="https://www.infoq.com/news/2026/03/agents-context-file-value-review/" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">InfoQ Coverage ↗</a>
         </div>
       </div>
       <div class="changelog-item">
@@ -1839,9 +2549,26 @@ Provide a remediation plan for every bug.</span></pre>
         <div><span class="change-type type-new">New</span></div>
         <div class="change-content">
           <strong>GitHub Copilot SDK enters technical preview</strong>
-          <span>Embeds Copilot's full agentic runtime (planning, tool use, file edits, memory) into any application. Available in Python, TypeScript, Go, and .NET. Supports BYOK for OpenAI, Azure AI Foundry, and Anthropic models.</span>
+          <span>Embeds Copilot's full agentic runtime into any application. Python, TypeScript, Go, and .NET. BYOK for OpenAI, Azure AI Foundry, and Anthropic.</span>
           <a href="https://github.blog/news-insights/company-news/build-an-agent-into-any-app-with-the-github-copilot-sdk/" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">Announcement ↗</a>
-          <a href="https://github.com/github/copilot-sdk" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">GitHub ↗</a>
+        </div>
+      </div>
+      <div class="changelog-item">
+        <div class="change-date">Dec 18, 2025</div>
+        <div><span class="change-type type-new">New</span></div>
+        <div class="change-content">
+          <strong>GitHub Copilot Agent Skills launched</strong>
+          <span>Copilot now supports <code>SKILL.md</code> natively. Store project skills in <code>.github/skills/</code>; personal in <code>~/.copilot/skills/</code>. Invoke with <code>/skill-name</code> or let Copilot auto-load based on the <code>description</code> field.</span>
+          <a href="https://github.blog/changelog/2025-12-18-github-copilot-now-supports-agent-skills/" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">Changelog ↗</a>
+        </div>
+      </div>
+      <div class="changelog-item">
+        <div class="change-date">Dec 9, 2025</div>
+        <div><span class="change-type type-standard">Standard</span></div>
+        <div class="change-content">
+          <strong>AGENTS.md donated to Linux Foundation / Agentic AI Foundation</strong>
+          <span>OpenAI contributed AGENTS.md to the newly formed AAIF alongside Anthropic's MCP. Platinum members include AWS, Anthropic, Google, Microsoft, and OpenAI. Adoption exceeds 60,000 open-source projects.</span>
+          <a href="https://aaif.org/" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">AAIF ↗</a>
         </div>
       </div>
       <div class="changelog-item">
@@ -1849,9 +2576,8 @@ Provide a remediation plan for every bug.</span></pre>
         <div><span class="change-type type-standard">Standard</span></div>
         <div class="change-content">
           <strong>AGENTS.md formalized as open standard</strong>
-          <span>Collaborative effort between OpenAI, Google, Cursor, Factory, and Sourcegraph. Now maintained under the Agentic AI Foundation / Linux Foundation. 20,000+ repos adopted.</span>
+          <span>Collaborative effort between OpenAI, Google, Cursor, Factory, and Sourcegraph. Now maintained under the Agentic AI Foundation / Linux Foundation.</span>
           <a href="https://agents.md/" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">agents.md ↗</a>
-          <a href="https://github.com/agentsmd/agents.md" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">GitHub ↗</a>
         </div>
       </div>
       <div class="changelog-item">
@@ -1864,58 +2590,20 @@ Provide a remediation plan for every bug.</span></pre>
         </div>
       </div>
       <div class="changelog-item">
-        <div class="change-date">Dec 18, 2025</div>
-        <div><span class="change-type type-new">New</span></div>
-        <div class="change-content">
-          <strong>GitHub Copilot Agent Skills launched</strong>
-          <span>Copilot now supports <code>SKILL.md</code> natively — the same format as Claude Code skills. Store project skills in <code>.github/skills/</code> or <code>.claude/skills/</code>; personal skills in <code>~/.copilot/skills/</code>. Invoke with <code>/skill-name</code> in chat or let Copilot auto-load based on the <code>description</code> frontmatter field.</span>
-          <a href="https://github.blog/changelog/2025-12-18-github-copilot-now-supports-agent-skills/" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">Changelog ↗</a>
-          <a href="https://docs.github.com/en/copilot/how-tos/use-copilot-agents/coding-agent/create-skills" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">Docs ↗</a>
-        </div>
-      </div>
-      <div class="changelog-item">
-        <div class="change-date">Dec 9, 2025</div>
-        <div><span class="change-type type-standard">Standard</span></div>
-        <div class="change-content">
-          <strong>AGENTS.md donated to Linux Foundation / Agentic AI Foundation</strong>
-          <span>OpenAI contributed AGENTS.md to the newly formed AAIF alongside Anthropic's MCP. Platinum members include AWS, Anthropic, Google, Microsoft, and OpenAI. Adoption now exceeds 60,000 open-source projects.</span>
-          <a href="https://aaif.org/" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">AAIF ↗</a>
-        </div>
-      </div>
-      <div class="changelog-item">
-        <div class="change-date">Nov 2025</div>
-        <div><span class="change-type type-update">Update</span></div>
-        <div class="change-content">
-          <strong>Copilot adds excludeAgent property to *.instructions.md</strong>
-          <span>Fine-grained control over which Copilot agent (chat, code review, coding agent) uses a given instructions file.</span>
-          <a href="https://github.blog/changelog/2025-11-12-copilot-code-review-and-coding-agent-now-support-agent-specific-instructions/" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">Changelog ↗</a>
-        </div>
-      </div>
-      <div class="changelog-item">
-        <div class="change-date">Jul 2025</div>
-        <div><span class="change-type type-new">New</span></div>
-        <div class="change-content">
-          <strong>Copilot coding agent adds *.instructions.md support</strong>
-          <span>Path-specific instructions via YAML frontmatter applyTo glob patterns. Stored in .github/instructions/.</span>
-          <a href="https://docs.github.com/copilot/customizing-copilot/adding-custom-instructions-for-github-copilot" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">Docs ↗</a>
-        </div>
-      </div>
-      <div class="changelog-item">
         <div class="change-date">Early 2025</div>
         <div><span class="change-type type-new">New</span></div>
         <div class="change-content">
-          <strong>Claude Code 2.0 released with subagents and skills</strong>
+          <strong>Claude Code 2.0 — subagents and skills</strong>
           <span>Introduced .claude/agents/, .claude/commands/, and .claude/skills/ directory conventions. Skills shareable across claude.ai, Claude Code, and Claude Desktop.</span>
           <a href="https://docs.anthropic.com/en/docs/claude-code/overview" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">Claude Code Docs ↗</a>
-          <a href="https://github.com/anthropics/claude-code" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">GitHub ↗</a>
         </div>
       </div>
       <div class="changelog-item">
         <div class="change-date">2024–2025</div>
         <div><span class="change-type type-deprecated">Deprecated</span></div>
         <div class="change-content">
-          <strong>.cursorrules file deprecated by Cursor</strong>
-          <span>Replaced by the more powerful .cursor/rules/*.mdc system with four loading modes and glob-based conditional application.</span>
+          <strong>.cursorrules deprecated by Cursor</strong>
+          <span>Replaced by .cursor/rules/*.mdc with four loading modes and glob-based conditional application.</span>
           <a href="https://docs.cursor.com/context/rules" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">Cursor Rules Docs ↗</a>
         </div>
       </div>
@@ -1924,6 +2612,7 @@ Provide a remediation plan for every bug.</span></pre>
 </section>
 
 <hr class="divider" />
+
 <footer>
   <div class="footer-inner">
     <p class="footer-note">
@@ -1934,7 +2623,7 @@ Provide a remediation plan for every bug.</span></pre>
       <a href="https://code.claude.com/docs" target="_blank">Claude Code Docs</a> ·
       <a href="https://github.com/github/awesome-copilot" target="_blank">awesome-copilot</a><br/>
       <br/>
-      PRs welcome · Keep it accurate · Keep it current
+      See something wrong or missing? <a href="https://github.com/thegoo/ai-agent-cheatsheet/blob/main/CONTRIBUTING.md" target="_blank">Read CONTRIBUTING.md</a> · <a href="https://github.com/thegoo/ai-agent-cheatsheet/issues/new" target="_blank">Open an issue</a> · <a href="https://github.com/thegoo/ai-agent-cheatsheet/pulls" target="_blank">Raise a PR</a>
     </p>
   </div>
 </footer>
