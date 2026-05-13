@@ -1708,20 +1708,23 @@ Provide a remediation plan for every bug.</span></pre>
           <a href="https://github.com/bouncer-md/bouncer-md" target="_blank" class="project-link">github.com/bouncer-md/bouncer-md ↗</a>
         </div>
         <div class="project-card-body">
-          <p class="project-desc">A portable, open-source trust policy and guardrail specification for agentic systems. Defines agent behavior boundaries — what actions are permitted, denied, or require human approval — in a single <code>bouncer.md</code> file that any agent runtime can read. Designed to be composable alongside <code>AGENTS.md</code> and <code>CLAUDE.md</code>: instruction files tell agents what to do, bouncer-md defines the guardrails within which they operate. Currently v0.5 with a full repo structure, test suite, and examples. Maintained independently of any tool vendor to preserve community credibility.</p>
+          <p class="project-desc">A portable, open-source guardrail and trust policy specification for agentic systems — safety and compliance only, by design. Sits in a clear three-layer stack: <code>agent.md → behavior</code>, <code>skill.md → capabilities</code>, <code>bouncer.md → guardrails</code>. Drop a <code>bouncer.md</code> next to your agent file and reference it with a single instruction block — no service, no API call, no DSL. Global baseline via <code>bouncer.md</code>; scoped additive policies via <code>*.bouncer.md</code> (additive only — cannot relax higher-scope controls). Ships with a reference resolver for deterministic enforcement in production pipelines, an automated test harness (Python + Node.js) that runs adversarial inputs against the LLM with no built-in safety net, VS Code YAML schema validation, and community example policies for prompt injection, secret protection, and tool execution safety. Designed to complement OTel GenAI Semantic Conventions: bouncer defines what rules exist and when they fire; OTel defines whether they fired and what happened.</p>
           <div class="project-compat">
             <div class="compat-label">Compatibility</div>
             <div class="compat-tags">
               <span class="compat-tag supported">✓ Runtime-agnostic spec</span>
+              <span class="compat-tag supported">✓ LangChain / LangGraph</span>
               <span class="compat-tag supported">✓ Claude Code</span>
               <span class="compat-tag supported">✓ GitHub Copilot</span>
               <span class="compat-tag supported">✓ OpenAI Codex</span>
+              <span class="compat-tag supported">✓ AutoGen / MAF</span>
             </div>
           </div>
           <div class="project-detail-row">
             <span class="detail-pill">License: MIT</span>
             <span class="detail-pill">Status: v0.5</span>
-            <span class="detail-pill">Docs: <a href="https://bouncer-md.github.io" target="_blank">bouncer-md.github.io</a></span>
+            <span class="detail-pill">Spec: <a href="https://github.com/bouncer-md/bouncer-md/blob/main/SPEC.md" target="_blank">SPEC.md ↗</a></span>
+            <span class="detail-pill">GitHub: <a href="https://github.com/bouncer-md/bouncer-md" target="_blank">bouncer-md/bouncer-md ↗</a></span>
           </div>
         </div>
       </div>
@@ -1844,7 +1847,7 @@ Provide a remediation plan for every bug.</span></pre>
         <div><span class="change-type type-new">New</span></div>
         <div class="change-content">
           <strong>bouncer-md v0.5 launches</strong>
-          <span>A portable, open-source trust policy and guardrail specification for agentic systems. Defines permitted, denied, and approval-gated actions in a single <code>bouncer.md</code> file composable alongside existing instruction files. Runtime-agnostic by design, maintained independently of any tool vendor. Ships with a full repo structure, test suite, and examples.</span>
+          <span>A portable, open-source guardrail and trust policy specification — safety and compliance only, separate from behavior and capability files. Global baseline via <code>bouncer.md</code>; scoped additive policies via <code>*.bouncer.md</code>. Ships with a reference resolver for production pipeline enforcement, an automated adversarial test harness (Python + Node.js), VS Code YAML schema validation, and community example policies. Designed to complement OTel GenAI Semantic Conventions.</span>
           <a href="https://github.com/bouncer-md/bouncer-md" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">GitHub ↗</a>
           <a href="https://bouncer-md.github.io" target="_blank" rel="noopener" class="doc-link" style="margin-top:6px;display:inline-block;">Docs ↗</a>
         </div>
